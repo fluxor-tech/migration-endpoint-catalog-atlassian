@@ -1,118 +1,3867 @@
 vendor: Atlassian
 product: Confluence Cloud
 api_family: Confluence Cloud REST API v2
-base_url_template: "https://{site}.atlassian.net/wiki"
+base_url_template: https://{site}.atlassian.net/wiki
 official_docs:
-  root: "https://developer.atlassian.com/cloud/confluence/rest/v2/"
-  authentication: "https://developer.atlassian.com/cloud/confluence/rest/v2/intro/#authentication-and-authorization"
-catalog_status: starter
-last_reviewed: "2026-06-20"
+  root: https://developer.atlassian.com/cloud/confluence/rest/v2/
+  authentication: https://developer.atlassian.com/cloud/confluence/rest/v2/intro/#authentication-and-authorization
+  openapi_source: sources/confluence-cloud-openapi.json
+catalog_status: active
+last_reviewed: '2026-06-20'
+generation:
+  source: official_openapi
+  endpoint_count: 218
 endpoints:
-  - id: confluence-get-pages
-    status: reviewed
-    method: GET
-    path: /api/v2/pages
-    summary: List pages.
-    migration_phase: extract
-    migration_use:
-      - Page inventory
-      - Space export planning
-      - Content validation
-    permissions:
-      - View permission on the relevant spaces/pages
-    scopes:
-      granular:
-        - read:page:confluence
-    pagination:
-      style: cursor
-    official_doc_url: "https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-page/"
-
-  - id: confluence-get-page
-    status: reviewed
-    method: GET
-    path: /api/v2/pages/{id}
-    summary: Read a page by ID.
-    migration_phase: extract
-    migration_use:
-      - Page body extraction
-      - Content comparison
-      - Post-migration validation
-    permissions:
-      - View permission on the page
-    scopes:
-      granular:
-        - read:page:confluence
-    official_doc_url: "https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-page/"
-    notes:
-      - Include body formats required by the migration pipeline.
-
-  - id: confluence-create-page
-    status: reviewed
-    method: POST
-    path: /api/v2/pages
-    summary: Create a page.
-    migration_phase: load
-    migration_use:
-      - Target page creation
-      - Documentation publication
-    permissions:
-      - Add page permission in the target space
-    scopes:
-      granular:
-        - write:page:confluence
-    official_doc_url: "https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-page/"
-
-  - id: confluence-update-page
-    status: reviewed
-    method: PUT
-    path: /api/v2/pages/{id}
-    summary: Update a page.
-    migration_phase: load
-    migration_use:
-      - Page content update
-      - Versioned documentation updates
-      - Post-load correction
-    permissions:
-      - Edit permission on the page
-    scopes:
-      granular:
-        - write:page:confluence
-    official_doc_url: "https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-page/"
-    notes:
-      - Confluence updates are versioned; capture current version before update.
-
-  - id: confluence-get-spaces
-    status: reviewed
-    method: GET
-    path: /api/v2/spaces
-    summary: List spaces.
-    migration_phase: discover
-    migration_use:
-      - Space inventory
-      - Source-to-target space mapping
-    permissions:
-      - View permission on spaces
-    scopes:
-      granular:
-        - read:space:confluence
-    pagination:
-      style: cursor
-    official_doc_url: "https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space/"
-
-  - id: confluence-get-attachments
-    status: candidate
-    method: GET
-    path: /api/v2/pages/{id}/attachments
-    summary: List page attachments.
-    migration_phase: extract
-    migration_use:
-      - Attachment inventory
-      - File migration planning
-      - Attachment validation
-    permissions:
-      - View permission on the page
-    scopes:
-      granular:
-        - read:attachment:confluence
-    official_doc_url: "https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-attachment/"
-
+- id: admin-key-delete-admin-key
+  status: reviewed
+  method: DELETE
+  path: /admin-key
+  summary: Disable Admin Key
+  operation_id: disableAdminKey
+  api_group: Admin Key
+  migration_phase: reconcile
+  migration_use:
+  - Admin Key reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-admin-key/
+- id: admin-key-get-admin-key
+  status: reviewed
+  method: GET
+  path: /admin-key
+  summary: Get Admin Key
+  operation_id: getAdminKey
+  api_group: Admin Key
+  migration_phase: extract
+  migration_use:
+  - Admin Key extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-admin-key/
+- id: admin-key-post-admin-key
+  status: reviewed
+  method: POST
+  path: /admin-key
+  summary: Enable Admin Key
+  operation_id: enableAdminKey
+  api_group: Admin Key
+  migration_phase: transform
+  migration_use:
+  - Admin Key reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-admin-key/
+- id: app-properties-get-app-properties
+  status: reviewed
+  method: GET
+  path: /app/properties
+  summary: Get Forge app properties.
+  operation_id: getForgeAppProperties
+  api_group: App Properties
+  migration_phase: extract
+  migration_use:
+  - App Properties extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:app-data:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-app-properties/
+- id: app-properties-delete-app-properties-propertykey
+  status: reviewed
+  method: DELETE
+  path: /app/properties/{propertyKey}
+  summary: Deletes a Forge app property.
+  operation_id: deleteForgeAppProperty
+  api_group: App Properties
+  migration_phase: reconcile
+  migration_use:
+  - App Properties reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:app-data:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-app-properties/
+- id: app-properties-get-app-properties-propertykey
+  status: reviewed
+  method: GET
+  path: /app/properties/{propertyKey}
+  summary: Get a Forge app property by key.
+  operation_id: getForgeAppProperty
+  api_group: App Properties
+  migration_phase: extract
+  migration_use:
+  - App Properties extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:app-data:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-app-properties/
+- id: app-properties-put-app-properties-propertykey
+  status: reviewed
+  method: PUT
+  path: /app/properties/{propertyKey}
+  summary: Create or update a Forge app property.
+  operation_id: putForgeAppProperty
+  api_group: App Properties
+  migration_phase: load
+  migration_use:
+  - App Properties creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:app-data:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-app-properties/
+- id: attachment-get-attachments
+  status: reviewed
+  method: GET
+  path: /attachments
+  summary: Get attachments
+  operation_id: getAttachments
+  api_group: Attachment
+  migration_phase: extract
+  migration_use:
+  - Attachment extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:attachment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-attachment/
+- id: content-properties-get-attachments-attachment-id-properties
+  status: reviewed
+  method: GET
+  path: /attachments/{attachment-id}/properties
+  summary: Get content properties for attachment
+  operation_id: getAttachmentContentProperties
+  api_group: Content Properties
+  migration_phase: extract
+  migration_use:
+  - Content Properties extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:attachment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-post-attachments-attachment-id-properties
+  status: reviewed
+  method: POST
+  path: /attachments/{attachment-id}/properties
+  summary: Create content property for attachment
+  operation_id: createAttachmentProperty
+  api_group: Content Properties
+  migration_phase: load
+  migration_use:
+  - Content Properties creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:attachment:confluence
+    - write:attachment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-delete-attachments-attachment-id-properties-property-id
+  status: reviewed
+  method: DELETE
+  path: /attachments/{attachment-id}/properties/{property-id}
+  summary: Delete content property for attachment by id
+  operation_id: deleteAttachmentPropertyById
+  api_group: Content Properties
+  migration_phase: reconcile
+  migration_use:
+  - Content Properties reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:attachment:confluence
+    - write:attachment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-get-attachments-attachment-id-properties-property-id
+  status: reviewed
+  method: GET
+  path: /attachments/{attachment-id}/properties/{property-id}
+  summary: Get content property for attachment by id
+  operation_id: getAttachmentContentPropertiesById
+  api_group: Content Properties
+  migration_phase: extract
+  migration_use:
+  - Content Properties extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:attachment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-put-attachments-attachment-id-properties-property-id
+  status: reviewed
+  method: PUT
+  path: /attachments/{attachment-id}/properties/{property-id}
+  summary: Update content property for attachment by id
+  operation_id: updateAttachmentPropertyById
+  api_group: Content Properties
+  migration_phase: load
+  migration_use:
+  - Content Properties creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:attachment:confluence
+    - write:attachment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: version-get-attachments-attachment-id-versions-version-number
+  status: reviewed
+  method: GET
+  path: /attachments/{attachment-id}/versions/{version-number}
+  summary: Get version details for attachment version
+  operation_id: getAttachmentVersionDetails
+  api_group: Version
+  migration_phase: extract
+  migration_use:
+  - Version extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:attachment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-version/
+- id: attachment-delete-attachments-id
+  status: reviewed
+  method: DELETE
+  path: /attachments/{id}
+  summary: Delete attachment
+  operation_id: deleteAttachment
+  api_group: Attachment
+  migration_phase: reconcile
+  migration_use:
+  - Attachment reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - delete:attachment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-attachment/
+- id: attachment-get-attachments-id
+  status: reviewed
+  method: GET
+  path: /attachments/{id}
+  summary: Get attachment by id
+  operation_id: getAttachmentById
+  api_group: Attachment
+  migration_phase: extract
+  migration_use:
+  - Attachment extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:attachment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-attachment/
+- id: comment-get-attachments-id-footer-comments
+  status: reviewed
+  method: GET
+  path: /attachments/{id}/footer-comments
+  summary: Get attachment comments
+  operation_id: getAttachmentComments
+  api_group: Comment
+  migration_phase: extract
+  migration_use:
+  - Comment extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-comment/
+- id: label-get-attachments-id-labels
+  status: reviewed
+  method: GET
+  path: /attachments/{id}/labels
+  summary: Get labels for attachment
+  operation_id: getAttachmentLabels
+  api_group: Label
+  migration_phase: extract
+  migration_use:
+  - Label extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:attachment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-label/
+- id: operation-get-attachments-id-operations
+  status: reviewed
+  method: GET
+  path: /attachments/{id}/operations
+  summary: Get permitted operations for attachment
+  operation_id: getAttachmentOperations
+  api_group: Operation
+  migration_phase: extract
+  migration_use:
+  - Operation extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:attachment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-operation/
+- id: attachment-get-attachments-id-thumbnail-download
+  status: reviewed
+  method: GET
+  path: /attachments/{id}/thumbnail/download
+  summary: Download attachment thumbnail by id
+  operation_id: getAttachmentThumbnailById
+  api_group: Attachment
+  migration_phase: extract
+  migration_use:
+  - Attachment extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:attachment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-attachment/
+- id: version-get-attachments-id-versions
+  status: reviewed
+  method: GET
+  path: /attachments/{id}/versions
+  summary: Get attachment versions
+  operation_id: getAttachmentVersions
+  api_group: Version
+  migration_phase: extract
+  migration_use:
+  - Version extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:attachment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-version/
+- id: blog-post-get-blogposts
+  status: reviewed
+  method: GET
+  path: /blogposts
+  summary: Get blog posts
+  operation_id: getBlogPosts
+  api_group: Blog Post
+  migration_phase: extract
+  migration_use:
+  - Blog Post extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-blog-post/
+- id: blog-post-post-blogposts
+  status: reviewed
+  method: POST
+  path: /blogposts
+  summary: Create blog post
+  operation_id: createBlogPost
+  api_group: Blog Post
+  migration_phase: load
+  migration_use:
+  - Blog Post creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-blog-post/
+- id: content-properties-get-blogposts-blogpost-id-properties
+  status: reviewed
+  method: GET
+  path: /blogposts/{blogpost-id}/properties
+  summary: Get content properties for blog post
+  operation_id: getBlogpostContentProperties
+  api_group: Content Properties
+  migration_phase: extract
+  migration_use:
+  - Content Properties extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-post-blogposts-blogpost-id-properties
+  status: reviewed
+  method: POST
+  path: /blogposts/{blogpost-id}/properties
+  summary: Create content property for blog post
+  operation_id: createBlogpostProperty
+  api_group: Content Properties
+  migration_phase: load
+  migration_use:
+  - Content Properties creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+    - write:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-delete-blogposts-blogpost-id-properties-property-id
+  status: reviewed
+  method: DELETE
+  path: /blogposts/{blogpost-id}/properties/{property-id}
+  summary: Delete content property for blogpost by id
+  operation_id: deleteBlogpostPropertyById
+  api_group: Content Properties
+  migration_phase: reconcile
+  migration_use:
+  - Content Properties reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+    - write:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-get-blogposts-blogpost-id-properties-property-id
+  status: reviewed
+  method: GET
+  path: /blogposts/{blogpost-id}/properties/{property-id}
+  summary: Get content property for blog post by id
+  operation_id: getBlogpostContentPropertiesById
+  api_group: Content Properties
+  migration_phase: extract
+  migration_use:
+  - Content Properties extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-put-blogposts-blogpost-id-properties-property-id
+  status: reviewed
+  method: PUT
+  path: /blogposts/{blogpost-id}/properties/{property-id}
+  summary: Update content property for blog post by id
+  operation_id: updateBlogpostPropertyById
+  api_group: Content Properties
+  migration_phase: load
+  migration_use:
+  - Content Properties creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+    - write:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: version-get-blogposts-blogpost-id-versions-version-number
+  status: reviewed
+  method: GET
+  path: /blogposts/{blogpost-id}/versions/{version-number}
+  summary: Get version details for blog post version
+  operation_id: getBlogPostVersionDetails
+  api_group: Version
+  migration_phase: extract
+  migration_use:
+  - Version extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-version/
+- id: blog-post-delete-blogposts-id
+  status: reviewed
+  method: DELETE
+  path: /blogposts/{id}
+  summary: Delete blog post
+  operation_id: deleteBlogPost
+  api_group: Blog Post
+  migration_phase: reconcile
+  migration_use:
+  - Blog Post reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - delete:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-blog-post/
+- id: blog-post-get-blogposts-id
+  status: reviewed
+  method: GET
+  path: /blogposts/{id}
+  summary: Get blog post by id
+  operation_id: getBlogPostById
+  api_group: Blog Post
+  migration_phase: extract
+  migration_use:
+  - Blog Post extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-blog-post/
+- id: blog-post-put-blogposts-id
+  status: reviewed
+  method: PUT
+  path: /blogposts/{id}
+  summary: Update blog post
+  operation_id: updateBlogPost
+  api_group: Blog Post
+  migration_phase: load
+  migration_use:
+  - Blog Post creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-blog-post/
+- id: attachment-get-blogposts-id-attachments
+  status: reviewed
+  method: GET
+  path: /blogposts/{id}/attachments
+  summary: Get attachments for blog post
+  operation_id: getBlogpostAttachments
+  api_group: Attachment
+  migration_phase: extract
+  migration_use:
+  - Attachment extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:attachment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-attachment/
+- id: classification-level-get-blogposts-id-classification-level
+  status: reviewed
+  method: GET
+  path: /blogposts/{id}/classification-level
+  summary: Get blog post classification level
+  operation_id: getBlogPostClassificationLevel
+  api_group: Classification Level
+  migration_phase: extract
+  migration_use:
+  - Classification Level extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+    - write:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-classification-level/
+- id: classification-level-put-blogposts-id-classification-level
+  status: reviewed
+  method: PUT
+  path: /blogposts/{id}/classification-level
+  summary: Update blog post classification level
+  operation_id: putBlogPostClassificationLevel
+  api_group: Classification Level
+  migration_phase: load
+  migration_use:
+  - Classification Level creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-classification-level/
+- id: classification-level-post-blogposts-id-classification-level-reset
+  status: reviewed
+  method: POST
+  path: /blogposts/{id}/classification-level/reset
+  summary: Reset blog post classification level
+  operation_id: postBlogPostClassificationLevel
+  api_group: Classification Level
+  migration_phase: transform
+  migration_use:
+  - Classification Level reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-classification-level/
+- id: custom-content-get-blogposts-id-custom-content
+  status: reviewed
+  method: GET
+  path: /blogposts/{id}/custom-content
+  summary: Get custom content by type in blog post
+  operation_id: getCustomContentByTypeInBlogPost
+  api_group: Custom Content
+  migration_phase: extract
+  migration_use:
+  - Custom Content extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:custom-content:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-custom-content/
+- id: comment-get-blogposts-id-footer-comments
+  status: reviewed
+  method: GET
+  path: /blogposts/{id}/footer-comments
+  summary: Get footer comments for blog post
+  operation_id: getBlogPostFooterComments
+  api_group: Comment
+  migration_phase: extract
+  migration_use:
+  - Comment extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-comment/
+- id: comment-get-blogposts-id-inline-comments
+  status: reviewed
+  method: GET
+  path: /blogposts/{id}/inline-comments
+  summary: Get inline comments for blog post
+  operation_id: getBlogPostInlineComments
+  api_group: Comment
+  migration_phase: extract
+  migration_use:
+  - Comment extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-comment/
+- id: label-get-blogposts-id-labels
+  status: reviewed
+  method: GET
+  path: /blogposts/{id}/labels
+  summary: Get labels for blog post
+  operation_id: getBlogPostLabels
+  api_group: Label
+  migration_phase: extract
+  migration_use:
+  - Label extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-label/
+- id: like-get-blogposts-id-likes-count
+  status: reviewed
+  method: GET
+  path: /blogposts/{id}/likes/count
+  summary: Get like count for blog post
+  operation_id: getBlogPostLikeCount
+  api_group: Like
+  migration_phase: extract
+  migration_use:
+  - Like extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-like/
+- id: like-get-blogposts-id-likes-users
+  status: reviewed
+  method: GET
+  path: /blogposts/{id}/likes/users
+  summary: Get account IDs of likes for blog post
+  operation_id: getBlogPostLikeUsers
+  api_group: Like
+  migration_phase: extract
+  migration_use:
+  - Like extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-like/
+- id: operation-get-blogposts-id-operations
+  status: reviewed
+  method: GET
+  path: /blogposts/{id}/operations
+  summary: Get permitted operations for blog post
+  operation_id: getBlogPostOperations
+  api_group: Operation
+  migration_phase: extract
+  migration_use:
+  - Operation extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-operation/
+- id: redactions-post-blogposts-id-redact
+  status: reviewed
+  method: POST
+  path: /blogposts/{id}/redact
+  summary: Redact Content in a Confluence Blog Post
+  operation_id: postRedactBlog
+  api_group: Redactions
+  migration_phase: transform
+  migration_use:
+  - Redactions reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-redactions/
+- id: version-get-blogposts-id-versions
+  status: reviewed
+  method: GET
+  path: /blogposts/{id}/versions
+  summary: Get blog post versions
+  operation_id: getBlogPostVersions
+  api_group: Version
+  migration_phase: extract
+  migration_use:
+  - Version extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-version/
+- id: classification-level-get-classification-levels
+  status: reviewed
+  method: GET
+  path: /classification-levels
+  summary: Get list of classification levels
+  operation_id: getClassificationLevels
+  api_group: Classification Level
+  migration_phase: extract
+  migration_use:
+  - Classification Level extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:configuration:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-classification-level/
+- id: content-properties-get-comments-comment-id-properties
+  status: reviewed
+  method: GET
+  path: /comments/{comment-id}/properties
+  summary: Get content properties for comment
+  operation_id: getCommentContentProperties
+  api_group: Content Properties
+  migration_phase: extract
+  migration_use:
+  - Content Properties extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-post-comments-comment-id-properties
+  status: reviewed
+  method: POST
+  path: /comments/{comment-id}/properties
+  summary: Create content property for comment
+  operation_id: createCommentProperty
+  api_group: Content Properties
+  migration_phase: load
+  migration_use:
+  - Content Properties creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+    - write:comment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-delete-comments-comment-id-properties-property-id
+  status: reviewed
+  method: DELETE
+  path: /comments/{comment-id}/properties/{property-id}
+  summary: Delete content property for comment by id
+  operation_id: deleteCommentPropertyById
+  api_group: Content Properties
+  migration_phase: reconcile
+  migration_use:
+  - Content Properties reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+    - write:comment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-get-comments-comment-id-properties-property-id
+  status: reviewed
+  method: GET
+  path: /comments/{comment-id}/properties/{property-id}
+  summary: Get content property for comment by id
+  operation_id: getCommentContentPropertiesById
+  api_group: Content Properties
+  migration_phase: extract
+  migration_use:
+  - Content Properties extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-put-comments-comment-id-properties-property-id
+  status: reviewed
+  method: PUT
+  path: /comments/{comment-id}/properties/{property-id}
+  summary: Update content property for comment by id
+  operation_id: updateCommentPropertyById
+  api_group: Content Properties
+  migration_phase: load
+  migration_use:
+  - Content Properties creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+    - write:comment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-post-content-convert-ids-to-types
+  status: reviewed
+  method: POST
+  path: /content/convert-ids-to-types
+  summary: Convert content ids to content types
+  operation_id: convertContentIdsToContentTypes
+  api_group: Content
+  migration_phase: transform
+  migration_use:
+  - Content reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:content.metadata:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content/
+- id: custom-content-get-custom-content
+  status: reviewed
+  method: GET
+  path: /custom-content
+  summary: Get custom content by type
+  operation_id: getCustomContentByType
+  api_group: Custom Content
+  migration_phase: extract
+  migration_use:
+  - Custom Content extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:custom-content:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-custom-content/
+- id: custom-content-post-custom-content
+  status: reviewed
+  method: POST
+  path: /custom-content
+  summary: Create custom content
+  operation_id: createCustomContent
+  api_group: Custom Content
+  migration_phase: load
+  migration_use:
+  - Custom Content creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:custom-content:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-custom-content/
+- id: content-properties-get-custom-content-custom-content-id-properties
+  status: reviewed
+  method: GET
+  path: /custom-content/{custom-content-id}/properties
+  summary: Get content properties for custom content
+  operation_id: getCustomContentContentProperties
+  api_group: Content Properties
+  migration_phase: extract
+  migration_use:
+  - Content Properties extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:custom-content:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-post-custom-content-custom-content-id-properties
+  status: reviewed
+  method: POST
+  path: /custom-content/{custom-content-id}/properties
+  summary: Create content property for custom content
+  operation_id: createCustomContentProperty
+  api_group: Content Properties
+  migration_phase: load
+  migration_use:
+  - Content Properties creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:custom-content:confluence
+    - write:custom-content:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-delete-custom-content-custom-content-id-properties-property-id
+  status: reviewed
+  method: DELETE
+  path: /custom-content/{custom-content-id}/properties/{property-id}
+  summary: Delete content property for custom content by id
+  operation_id: deleteCustomContentPropertyById
+  api_group: Content Properties
+  migration_phase: reconcile
+  migration_use:
+  - Content Properties reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:custom-content:confluence
+    - write:custom-content:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-get-custom-content-custom-content-id-properties-property-id
+  status: reviewed
+  method: GET
+  path: /custom-content/{custom-content-id}/properties/{property-id}
+  summary: Get content property for custom content by id
+  operation_id: getCustomContentContentPropertiesById
+  api_group: Content Properties
+  migration_phase: extract
+  migration_use:
+  - Content Properties extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:custom-content:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-put-custom-content-custom-content-id-properties-property-id
+  status: reviewed
+  method: PUT
+  path: /custom-content/{custom-content-id}/properties/{property-id}
+  summary: Update content property for custom content by id
+  operation_id: updateCustomContentPropertyById
+  api_group: Content Properties
+  migration_phase: load
+  migration_use:
+  - Content Properties creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:custom-content:confluence
+    - write:custom-content:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: version-get-custom-content-custom-content-id-versions
+  status: reviewed
+  method: GET
+  path: /custom-content/{custom-content-id}/versions
+  summary: Get custom content versions
+  operation_id: getCustomContentVersions
+  api_group: Version
+  migration_phase: extract
+  migration_use:
+  - Version extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:custom-content:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-version/
+- id: version-get-custom-content-custom-content-id-versions-version-number
+  status: reviewed
+  method: GET
+  path: /custom-content/{custom-content-id}/versions/{version-number}
+  summary: Get version details for custom content version
+  operation_id: getCustomContentVersionDetails
+  api_group: Version
+  migration_phase: extract
+  migration_use:
+  - Version extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:custom-content:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-version/
+- id: custom-content-delete-custom-content-id
+  status: reviewed
+  method: DELETE
+  path: /custom-content/{id}
+  summary: Delete custom content
+  operation_id: deleteCustomContent
+  api_group: Custom Content
+  migration_phase: reconcile
+  migration_use:
+  - Custom Content reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - delete:custom-content:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-custom-content/
+- id: custom-content-get-custom-content-id
+  status: reviewed
+  method: GET
+  path: /custom-content/{id}
+  summary: Get custom content by id
+  operation_id: getCustomContentById
+  api_group: Custom Content
+  migration_phase: extract
+  migration_use:
+  - Custom Content extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:custom-content:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-custom-content/
+- id: custom-content-put-custom-content-id
+  status: reviewed
+  method: PUT
+  path: /custom-content/{id}
+  summary: Update custom content
+  operation_id: updateCustomContent
+  api_group: Custom Content
+  migration_phase: load
+  migration_use:
+  - Custom Content creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:custom-content:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-custom-content/
+- id: attachment-get-custom-content-id-attachments
+  status: reviewed
+  method: GET
+  path: /custom-content/{id}/attachments
+  summary: Get attachments for custom content
+  operation_id: getCustomContentAttachments
+  api_group: Attachment
+  migration_phase: extract
+  migration_use:
+  - Attachment extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:attachment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-attachment/
+- id: children-get-custom-content-id-children
+  status: reviewed
+  method: GET
+  path: /custom-content/{id}/children
+  summary: Get child custom content
+  operation_id: getChildCustomContent
+  api_group: Children
+  migration_phase: extract
+  migration_use:
+  - Children extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:custom-content:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-children/
+- id: comment-get-custom-content-id-footer-comments
+  status: reviewed
+  method: GET
+  path: /custom-content/{id}/footer-comments
+  summary: Get custom content comments
+  operation_id: getCustomContentComments
+  api_group: Comment
+  migration_phase: extract
+  migration_use:
+  - Comment extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-comment/
+- id: label-get-custom-content-id-labels
+  status: reviewed
+  method: GET
+  path: /custom-content/{id}/labels
+  summary: Get labels for custom content
+  operation_id: getCustomContentLabels
+  api_group: Label
+  migration_phase: extract
+  migration_use:
+  - Label extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:custom-content:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-label/
+- id: operation-get-custom-content-id-operations
+  status: reviewed
+  method: GET
+  path: /custom-content/{id}/operations
+  summary: Get permitted operations for custom content
+  operation_id: getCustomContentOperations
+  api_group: Operation
+  migration_phase: extract
+  migration_use:
+  - Operation extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:custom-content:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-operation/
+- id: data-policies-get-data-policies-metadata
+  status: reviewed
+  method: GET
+  path: /data-policies/metadata
+  summary: Get data policy metadata for the workspace
+  operation_id: getDataPolicyMetadata
+  api_group: Data Policies
+  migration_phase: extract
+  migration_use:
+  - Data Policies extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:configuration:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-data-policies/
+- id: data-policies-get-data-policies-spaces
+  status: reviewed
+  method: GET
+  path: /data-policies/spaces
+  summary: Get spaces with data policies
+  operation_id: getDataPolicySpaces
+  api_group: Data Policies
+  migration_phase: extract
+  migration_use:
+  - Data Policies extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:space:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-data-policies/
+- id: database-post-databases
+  status: reviewed
+  method: POST
+  path: /databases
+  summary: Create database
+  operation_id: createDatabase
+  api_group: Database
+  migration_phase: load
+  migration_use:
+  - Database creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:database:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-database/
+- id: content-properties-delete-databases-database-id-properties-property-id
+  status: reviewed
+  method: DELETE
+  path: /databases/{database-id}/properties/{property-id}
+  summary: Delete content property for database by id
+  operation_id: deleteDatabasePropertyById
+  api_group: Content Properties
+  migration_phase: reconcile
+  migration_use:
+  - Content Properties reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:database:confluence
+    - write:database:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-get-databases-database-id-properties-property-id
+  status: reviewed
+  method: GET
+  path: /databases/{database-id}/properties/{property-id}
+  summary: Get content property for database by id
+  operation_id: getDatabaseContentPropertiesById
+  api_group: Content Properties
+  migration_phase: extract
+  migration_use:
+  - Content Properties extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:database:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-put-databases-database-id-properties-property-id
+  status: reviewed
+  method: PUT
+  path: /databases/{database-id}/properties/{property-id}
+  summary: Update content property for database by id
+  operation_id: updateDatabasePropertyById
+  api_group: Content Properties
+  migration_phase: load
+  migration_use:
+  - Content Properties creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:database:confluence
+    - write:database:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: database-delete-databases-id
+  status: reviewed
+  method: DELETE
+  path: /databases/{id}
+  summary: Delete database
+  operation_id: deleteDatabase
+  api_group: Database
+  migration_phase: reconcile
+  migration_use:
+  - Database reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - delete:database:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-database/
+- id: database-get-databases-id
+  status: reviewed
+  method: GET
+  path: /databases/{id}
+  summary: Get database by id
+  operation_id: getDatabaseById
+  api_group: Database
+  migration_phase: extract
+  migration_use:
+  - Database extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:database:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-database/
+- id: ancestors-get-databases-id-ancestors
+  status: reviewed
+  method: GET
+  path: /databases/{id}/ancestors
+  summary: Get all ancestors of database
+  operation_id: getDatabaseAncestors
+  api_group: Ancestors
+  migration_phase: extract
+  migration_use:
+  - Ancestors extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:content.metadata:confluence
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-ancestors/
+- id: classification-level-get-databases-id-classification-level
+  status: reviewed
+  method: GET
+  path: /databases/{id}/classification-level
+  summary: Get database classification level
+  operation_id: getDatabaseClassificationLevel
+  api_group: Classification Level
+  migration_phase: extract
+  migration_use:
+  - Classification Level extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:database:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-classification-level/
+- id: classification-level-put-databases-id-classification-level
+  status: reviewed
+  method: PUT
+  path: /databases/{id}/classification-level
+  summary: Update database classification level
+  operation_id: putDatabaseClassificationLevel
+  api_group: Classification Level
+  migration_phase: load
+  migration_use:
+  - Classification Level creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:database:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-classification-level/
+- id: classification-level-post-databases-id-classification-level-reset
+  status: reviewed
+  method: POST
+  path: /databases/{id}/classification-level/reset
+  summary: Reset database classification level
+  operation_id: postDatabaseClassificationLevel
+  api_group: Classification Level
+  migration_phase: transform
+  migration_use:
+  - Classification Level reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:database:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-classification-level/
+- id: descendants-get-databases-id-descendants
+  status: reviewed
+  method: GET
+  path: /databases/{id}/descendants
+  summary: Get descendants of a database
+  operation_id: getDatabaseDescendants
+  api_group: Descendants
+  migration_phase: extract
+  migration_use:
+  - Descendants extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:hierarchical-content:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-descendants/
+- id: children-get-databases-id-direct-children
+  status: reviewed
+  method: GET
+  path: /databases/{id}/direct-children
+  summary: Get direct children of a database
+  operation_id: getDatabaseDirectChildren
+  api_group: Children
+  migration_phase: extract
+  migration_use:
+  - Children extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:hierarchical-content:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-children/
+- id: operation-get-databases-id-operations
+  status: reviewed
+  method: GET
+  path: /databases/{id}/operations
+  summary: Get permitted operations for a database
+  operation_id: getDatabaseOperations
+  api_group: Operation
+  migration_phase: extract
+  migration_use:
+  - Operation extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:database:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-operation/
+- id: content-properties-get-databases-id-properties
+  status: reviewed
+  method: GET
+  path: /databases/{id}/properties
+  summary: Get content properties for database
+  operation_id: getDatabaseContentProperties
+  api_group: Content Properties
+  migration_phase: extract
+  migration_use:
+  - Content Properties extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:database:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-post-databases-id-properties
+  status: reviewed
+  method: POST
+  path: /databases/{id}/properties
+  summary: Create content property for database
+  operation_id: createDatabaseProperty
+  api_group: Content Properties
+  migration_phase: load
+  migration_use:
+  - Content Properties creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:database:confluence
+    - write:database:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: smart-link-post-embeds
+  status: reviewed
+  method: POST
+  path: /embeds
+  summary: Create Smart Link in the content tree
+  operation_id: createSmartLink
+  api_group: Smart Link
+  migration_phase: load
+  migration_use:
+  - Smart Link creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:embed:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-smart-link/
+- id: content-properties-delete-embeds-embed-id-properties-property-id
+  status: reviewed
+  method: DELETE
+  path: /embeds/{embed-id}/properties/{property-id}
+  summary: Delete content property for Smart Link in the content tree by id
+  operation_id: deleteSmartLinkPropertyById
+  api_group: Content Properties
+  migration_phase: reconcile
+  migration_use:
+  - Content Properties reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:embed:confluence
+    - write:embed:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-get-embeds-embed-id-properties-property-id
+  status: reviewed
+  method: GET
+  path: /embeds/{embed-id}/properties/{property-id}
+  summary: Get content property for Smart Link in the content tree by id
+  operation_id: getSmartLinkContentPropertiesById
+  api_group: Content Properties
+  migration_phase: extract
+  migration_use:
+  - Content Properties extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:embed:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-put-embeds-embed-id-properties-property-id
+  status: reviewed
+  method: PUT
+  path: /embeds/{embed-id}/properties/{property-id}
+  summary: Update content property for Smart Link in the content tree by id
+  operation_id: updateSmartLinkPropertyById
+  api_group: Content Properties
+  migration_phase: load
+  migration_use:
+  - Content Properties creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:embed:confluence
+    - write:embed:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: smart-link-delete-embeds-id
+  status: reviewed
+  method: DELETE
+  path: /embeds/{id}
+  summary: Delete Smart Link in the content tree
+  operation_id: deleteSmartLink
+  api_group: Smart Link
+  migration_phase: reconcile
+  migration_use:
+  - Smart Link reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - delete:embed:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-smart-link/
+- id: smart-link-get-embeds-id
+  status: reviewed
+  method: GET
+  path: /embeds/{id}
+  summary: Get Smart Link in the content tree by id
+  operation_id: getSmartLinkById
+  api_group: Smart Link
+  migration_phase: extract
+  migration_use:
+  - Smart Link extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:embed:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-smart-link/
+- id: ancestors-get-embeds-id-ancestors
+  status: reviewed
+  method: GET
+  path: /embeds/{id}/ancestors
+  summary: Get all ancestors of Smart Link in content tree
+  operation_id: getSmartLinkAncestors
+  api_group: Ancestors
+  migration_phase: extract
+  migration_use:
+  - Ancestors extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:content.metadata:confluence
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-ancestors/
+- id: descendants-get-embeds-id-descendants
+  status: reviewed
+  method: GET
+  path: /embeds/{id}/descendants
+  summary: Get descendants of a smart link
+  operation_id: getSmartLinkDescendants
+  api_group: Descendants
+  migration_phase: extract
+  migration_use:
+  - Descendants extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:hierarchical-content:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-descendants/
+- id: children-get-embeds-id-direct-children
+  status: reviewed
+  method: GET
+  path: /embeds/{id}/direct-children
+  summary: Get direct children of a Smart Link
+  operation_id: getSmartLinkDirectChildren
+  api_group: Children
+  migration_phase: extract
+  migration_use:
+  - Children extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:hierarchical-content:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-children/
+- id: operation-get-embeds-id-operations
+  status: reviewed
+  method: GET
+  path: /embeds/{id}/operations
+  summary: Get permitted operations for a Smart Link in the content tree
+  operation_id: getSmartLinkOperations
+  api_group: Operation
+  migration_phase: extract
+  migration_use:
+  - Operation extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:embed:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-operation/
+- id: content-properties-get-embeds-id-properties
+  status: reviewed
+  method: GET
+  path: /embeds/{id}/properties
+  summary: Get content properties for Smart Link in the content tree
+  operation_id: getSmartLinkContentProperties
+  api_group: Content Properties
+  migration_phase: extract
+  migration_use:
+  - Content Properties extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:embed:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-post-embeds-id-properties
+  status: reviewed
+  method: POST
+  path: /embeds/{id}/properties
+  summary: Create content property for Smart Link in the content tree
+  operation_id: createSmartLinkProperty
+  api_group: Content Properties
+  migration_phase: load
+  migration_use:
+  - Content Properties creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:embed:confluence
+    - write:embed:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: folder-post-folders
+  status: reviewed
+  method: POST
+  path: /folders
+  summary: Create folder
+  operation_id: createFolder
+  api_group: Folder
+  migration_phase: load
+  migration_use:
+  - Folder creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:folder:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-folder/
+- id: content-properties-delete-folders-folder-id-properties-property-id
+  status: reviewed
+  method: DELETE
+  path: /folders/{folder-id}/properties/{property-id}
+  summary: Delete content property for folder by id
+  operation_id: deleteFolderPropertyById
+  api_group: Content Properties
+  migration_phase: reconcile
+  migration_use:
+  - Content Properties reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:folder:confluence
+    - write:folder:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-get-folders-folder-id-properties-property-id
+  status: reviewed
+  method: GET
+  path: /folders/{folder-id}/properties/{property-id}
+  summary: Get content property for folder by id
+  operation_id: getFolderContentPropertiesById
+  api_group: Content Properties
+  migration_phase: extract
+  migration_use:
+  - Content Properties extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:folder:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-put-folders-folder-id-properties-property-id
+  status: reviewed
+  method: PUT
+  path: /folders/{folder-id}/properties/{property-id}
+  summary: Update content property for folder by id
+  operation_id: updateFolderPropertyById
+  api_group: Content Properties
+  migration_phase: load
+  migration_use:
+  - Content Properties creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:folder:confluence
+    - write:folder:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: folder-delete-folders-id
+  status: reviewed
+  method: DELETE
+  path: /folders/{id}
+  summary: Delete folder
+  operation_id: deleteFolder
+  api_group: Folder
+  migration_phase: reconcile
+  migration_use:
+  - Folder reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - delete:folder:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-folder/
+- id: folder-get-folders-id
+  status: reviewed
+  method: GET
+  path: /folders/{id}
+  summary: Get folder by id
+  operation_id: getFolderById
+  api_group: Folder
+  migration_phase: extract
+  migration_use:
+  - Folder extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:folder:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-folder/
+- id: ancestors-get-folders-id-ancestors
+  status: reviewed
+  method: GET
+  path: /folders/{id}/ancestors
+  summary: Get all ancestors of folder
+  operation_id: getFolderAncestors
+  api_group: Ancestors
+  migration_phase: extract
+  migration_use:
+  - Ancestors extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:content.metadata:confluence
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-ancestors/
+- id: descendants-get-folders-id-descendants
+  status: reviewed
+  method: GET
+  path: /folders/{id}/descendants
+  summary: Get descendants of folder
+  operation_id: getFolderDescendants
+  api_group: Descendants
+  migration_phase: extract
+  migration_use:
+  - Descendants extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:hierarchical-content:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-descendants/
+- id: children-get-folders-id-direct-children
+  status: reviewed
+  method: GET
+  path: /folders/{id}/direct-children
+  summary: Get direct children of a folder
+  operation_id: getFolderDirectChildren
+  api_group: Children
+  migration_phase: extract
+  migration_use:
+  - Children extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:hierarchical-content:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-children/
+- id: operation-get-folders-id-operations
+  status: reviewed
+  method: GET
+  path: /folders/{id}/operations
+  summary: Get permitted operations for a folder
+  operation_id: getFolderOperations
+  api_group: Operation
+  migration_phase: extract
+  migration_use:
+  - Operation extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:folder:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-operation/
+- id: content-properties-get-folders-id-properties
+  status: reviewed
+  method: GET
+  path: /folders/{id}/properties
+  summary: Get content properties for folder
+  operation_id: getFolderContentProperties
+  api_group: Content Properties
+  migration_phase: extract
+  migration_use:
+  - Content Properties extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:folder:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-post-folders-id-properties
+  status: reviewed
+  method: POST
+  path: /folders/{id}/properties
+  summary: Create content property for folder
+  operation_id: createFolderProperty
+  api_group: Content Properties
+  migration_phase: load
+  migration_use:
+  - Content Properties creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:folder:confluence
+    - write:folder:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: comment-get-footer-comments
+  status: reviewed
+  method: GET
+  path: /footer-comments
+  summary: Get footer comments
+  operation_id: getFooterComments
+  api_group: Comment
+  migration_phase: extract
+  migration_use:
+  - Comment extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-comment/
+- id: comment-post-footer-comments
+  status: reviewed
+  method: POST
+  path: /footer-comments
+  summary: Create footer comment
+  operation_id: createFooterComment
+  api_group: Comment
+  migration_phase: load
+  migration_use:
+  - Comment creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:comment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-comment/
+- id: comment-delete-footer-comments-comment-id
+  status: reviewed
+  method: DELETE
+  path: /footer-comments/{comment-id}
+  summary: Delete footer comment
+  operation_id: deleteFooterComment
+  api_group: Comment
+  migration_phase: reconcile
+  migration_use:
+  - Comment reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - delete:comment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-comment/
+- id: comment-get-footer-comments-comment-id
+  status: reviewed
+  method: GET
+  path: /footer-comments/{comment-id}
+  summary: Get footer comment by id
+  operation_id: getFooterCommentById
+  api_group: Comment
+  migration_phase: extract
+  migration_use:
+  - Comment extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-comment/
+- id: comment-put-footer-comments-comment-id
+  status: reviewed
+  method: PUT
+  path: /footer-comments/{comment-id}
+  summary: Update footer comment
+  operation_id: updateFooterComment
+  api_group: Comment
+  migration_phase: load
+  migration_use:
+  - Comment creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:comment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-comment/
+- id: comment-get-footer-comments-id-children
+  status: reviewed
+  method: GET
+  path: /footer-comments/{id}/children
+  summary: Get children footer comments
+  operation_id: getFooterCommentChildren
+  api_group: Comment
+  migration_phase: extract
+  migration_use:
+  - Comment extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-comment/
+- id: like-get-footer-comments-id-likes-count
+  status: reviewed
+  method: GET
+  path: /footer-comments/{id}/likes/count
+  summary: Get like count for footer comment
+  operation_id: getFooterLikeCount
+  api_group: Like
+  migration_phase: extract
+  migration_use:
+  - Like extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-like/
+- id: like-get-footer-comments-id-likes-users
+  status: reviewed
+  method: GET
+  path: /footer-comments/{id}/likes/users
+  summary: Get account IDs of likes for footer comment
+  operation_id: getFooterLikeUsers
+  api_group: Like
+  migration_phase: extract
+  migration_use:
+  - Like extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-like/
+- id: operation-get-footer-comments-id-operations
+  status: reviewed
+  method: GET
+  path: /footer-comments/{id}/operations
+  summary: Get permitted operations for footer comment
+  operation_id: getFooterCommentOperations
+  api_group: Operation
+  migration_phase: extract
+  migration_use:
+  - Operation extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-operation/
+- id: version-get-footer-comments-id-versions
+  status: reviewed
+  method: GET
+  path: /footer-comments/{id}/versions
+  summary: Get footer comment versions
+  operation_id: getFooterCommentVersions
+  api_group: Version
+  migration_phase: extract
+  migration_use:
+  - Version extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-version/
+- id: version-get-footer-comments-id-versions-version-number
+  status: reviewed
+  method: GET
+  path: /footer-comments/{id}/versions/{version-number}
+  summary: Get version details for footer comment version
+  operation_id: getFooterCommentVersionDetails
+  api_group: Version
+  migration_phase: extract
+  migration_use:
+  - Version extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-version/
+- id: comment-get-inline-comments
+  status: reviewed
+  method: GET
+  path: /inline-comments
+  summary: Get inline comments
+  operation_id: getInlineComments
+  api_group: Comment
+  migration_phase: extract
+  migration_use:
+  - Comment extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-comment/
+- id: comment-post-inline-comments
+  status: reviewed
+  method: POST
+  path: /inline-comments
+  summary: Create inline comment
+  operation_id: createInlineComment
+  api_group: Comment
+  migration_phase: load
+  migration_use:
+  - Comment creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:comment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-comment/
+- id: comment-delete-inline-comments-comment-id
+  status: reviewed
+  method: DELETE
+  path: /inline-comments/{comment-id}
+  summary: Delete inline comment
+  operation_id: deleteInlineComment
+  api_group: Comment
+  migration_phase: reconcile
+  migration_use:
+  - Comment reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - delete:comment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-comment/
+- id: comment-get-inline-comments-comment-id
+  status: reviewed
+  method: GET
+  path: /inline-comments/{comment-id}
+  summary: Get inline comment by id
+  operation_id: getInlineCommentById
+  api_group: Comment
+  migration_phase: extract
+  migration_use:
+  - Comment extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-comment/
+- id: comment-put-inline-comments-comment-id
+  status: reviewed
+  method: PUT
+  path: /inline-comments/{comment-id}
+  summary: Update inline comment
+  operation_id: updateInlineComment
+  api_group: Comment
+  migration_phase: load
+  migration_use:
+  - Comment creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:comment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-comment/
+- id: comment-get-inline-comments-id-children
+  status: reviewed
+  method: GET
+  path: /inline-comments/{id}/children
+  summary: Get children inline comments
+  operation_id: getInlineCommentChildren
+  api_group: Comment
+  migration_phase: extract
+  migration_use:
+  - Comment extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-comment/
+- id: like-get-inline-comments-id-likes-count
+  status: reviewed
+  method: GET
+  path: /inline-comments/{id}/likes/count
+  summary: Get like count for inline comment
+  operation_id: getInlineLikeCount
+  api_group: Like
+  migration_phase: extract
+  migration_use:
+  - Like extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-like/
+- id: like-get-inline-comments-id-likes-users
+  status: reviewed
+  method: GET
+  path: /inline-comments/{id}/likes/users
+  summary: Get account IDs of likes for inline comment
+  operation_id: getInlineLikeUsers
+  api_group: Like
+  migration_phase: extract
+  migration_use:
+  - Like extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-like/
+- id: operation-get-inline-comments-id-operations
+  status: reviewed
+  method: GET
+  path: /inline-comments/{id}/operations
+  summary: Get permitted operations for inline comment
+  operation_id: getInlineCommentOperations
+  api_group: Operation
+  migration_phase: extract
+  migration_use:
+  - Operation extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-operation/
+- id: version-get-inline-comments-id-versions
+  status: reviewed
+  method: GET
+  path: /inline-comments/{id}/versions
+  summary: Get inline comment versions
+  operation_id: getInlineCommentVersions
+  api_group: Version
+  migration_phase: extract
+  migration_use:
+  - Version extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-version/
+- id: version-get-inline-comments-id-versions-version-number
+  status: reviewed
+  method: GET
+  path: /inline-comments/{id}/versions/{version-number}
+  summary: Get version details for inline comment version
+  operation_id: getInlineCommentVersionDetails
+  api_group: Version
+  migration_phase: extract
+  migration_use:
+  - Version extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-version/
+- id: label-get-labels
+  status: reviewed
+  method: GET
+  path: /labels
+  summary: Get labels
+  operation_id: getLabels
+  api_group: Label
+  migration_phase: extract
+  migration_use:
+  - Label extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:label:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-label/
+- id: attachment-get-labels-id-attachments
+  status: reviewed
+  method: GET
+  path: /labels/{id}/attachments
+  summary: Get attachments for label
+  operation_id: getLabelAttachments
+  api_group: Attachment
+  migration_phase: extract
+  migration_use:
+  - Attachment extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:attachment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-attachment/
+- id: blog-post-get-labels-id-blogposts
+  status: reviewed
+  method: GET
+  path: /labels/{id}/blogposts
+  summary: Get blog posts for label
+  operation_id: getLabelBlogPosts
+  api_group: Blog Post
+  migration_phase: extract
+  migration_use:
+  - Blog Post extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-blog-post/
+- id: page-get-labels-id-pages
+  status: reviewed
+  method: GET
+  path: /labels/{id}/pages
+  summary: Get pages for label
+  operation_id: getLabelPages
+  api_group: Page
+  migration_phase: extract
+  migration_use:
+  - Page extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-page/
+- id: page-get-pages
+  status: reviewed
+  method: GET
+  path: /pages
+  summary: Get pages
+  operation_id: getPages
+  api_group: Page
+  migration_phase: extract
+  migration_use:
+  - Page extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-page/
+- id: page-post-pages
+  status: reviewed
+  method: POST
+  path: /pages
+  summary: Create page
+  operation_id: createPage
+  api_group: Page
+  migration_phase: load
+  migration_use:
+  - Page creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-page/
+- id: page-delete-pages-id
+  status: reviewed
+  method: DELETE
+  path: /pages/{id}
+  summary: Delete page
+  operation_id: deletePage
+  api_group: Page
+  migration_phase: reconcile
+  migration_use:
+  - Page reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - delete:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-page/
+- id: page-get-pages-id
+  status: reviewed
+  method: GET
+  path: /pages/{id}
+  summary: Get page by id
+  operation_id: getPageById
+  api_group: Page
+  migration_phase: extract
+  migration_use:
+  - Page extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-page/
+- id: page-put-pages-id
+  status: reviewed
+  method: PUT
+  path: /pages/{id}
+  summary: Update page
+  operation_id: updatePage
+  api_group: Page
+  migration_phase: load
+  migration_use:
+  - Page creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-page/
+- id: ancestors-get-pages-id-ancestors
+  status: reviewed
+  method: GET
+  path: /pages/{id}/ancestors
+  summary: Get all ancestors of page
+  operation_id: getPageAncestors
+  api_group: Ancestors
+  migration_phase: extract
+  migration_use:
+  - Ancestors extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:content.metadata:confluence
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-ancestors/
+- id: attachment-get-pages-id-attachments
+  status: reviewed
+  method: GET
+  path: /pages/{id}/attachments
+  summary: Get attachments for page
+  operation_id: getPageAttachments
+  api_group: Attachment
+  migration_phase: extract
+  migration_use:
+  - Attachment extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:attachment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-attachment/
+- id: children-get-pages-id-children
+  status: deprecated
+  method: GET
+  path: /pages/{id}/children
+  summary: Get child pages
+  operation_id: getChildPages
+  api_group: Children
+  migration_phase: extract
+  migration_use:
+  - Children extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-children/
+- id: classification-level-get-pages-id-classification-level
+  status: reviewed
+  method: GET
+  path: /pages/{id}/classification-level
+  summary: Get page classification level
+  operation_id: getPageClassificationLevel
+  api_group: Classification Level
+  migration_phase: extract
+  migration_use:
+  - Classification Level extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+    - write:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-classification-level/
+- id: classification-level-put-pages-id-classification-level
+  status: reviewed
+  method: PUT
+  path: /pages/{id}/classification-level
+  summary: Update page classification level
+  operation_id: putPageClassificationLevel
+  api_group: Classification Level
+  migration_phase: load
+  migration_use:
+  - Classification Level creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-classification-level/
+- id: classification-level-post-pages-id-classification-level-reset
+  status: reviewed
+  method: POST
+  path: /pages/{id}/classification-level/reset
+  summary: Reset page classification level
+  operation_id: postPageClassificationLevel
+  api_group: Classification Level
+  migration_phase: transform
+  migration_use:
+  - Classification Level reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-classification-level/
+- id: custom-content-get-pages-id-custom-content
+  status: reviewed
+  method: GET
+  path: /pages/{id}/custom-content
+  summary: Get custom content by type in page
+  operation_id: getCustomContentByTypeInPage
+  api_group: Custom Content
+  migration_phase: extract
+  migration_use:
+  - Custom Content extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:custom-content:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-custom-content/
+- id: descendants-get-pages-id-descendants
+  status: reviewed
+  method: GET
+  path: /pages/{id}/descendants
+  summary: Get descendants of page
+  operation_id: getPageDescendants
+  api_group: Descendants
+  migration_phase: extract
+  migration_use:
+  - Descendants extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:hierarchical-content:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-descendants/
+- id: children-get-pages-id-direct-children
+  status: reviewed
+  method: GET
+  path: /pages/{id}/direct-children
+  summary: Get direct children of a page
+  operation_id: getPageDirectChildren
+  api_group: Children
+  migration_phase: extract
+  migration_use:
+  - Children extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:hierarchical-content:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-children/
+- id: comment-get-pages-id-footer-comments
+  status: reviewed
+  method: GET
+  path: /pages/{id}/footer-comments
+  summary: Get footer comments for page
+  operation_id: getPageFooterComments
+  api_group: Comment
+  migration_phase: extract
+  migration_use:
+  - Comment extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-comment/
+- id: comment-get-pages-id-inline-comments
+  status: reviewed
+  method: GET
+  path: /pages/{id}/inline-comments
+  summary: Get inline comments for page
+  operation_id: getPageInlineComments
+  api_group: Comment
+  migration_phase: extract
+  migration_use:
+  - Comment extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:comment:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-comment/
+- id: label-get-pages-id-labels
+  status: reviewed
+  method: GET
+  path: /pages/{id}/labels
+  summary: Get labels for page
+  operation_id: getPageLabels
+  api_group: Label
+  migration_phase: extract
+  migration_use:
+  - Label extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-label/
+- id: like-get-pages-id-likes-count
+  status: reviewed
+  method: GET
+  path: /pages/{id}/likes/count
+  summary: Get like count for page
+  operation_id: getPageLikeCount
+  api_group: Like
+  migration_phase: extract
+  migration_use:
+  - Like extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-like/
+- id: like-get-pages-id-likes-users
+  status: reviewed
+  method: GET
+  path: /pages/{id}/likes/users
+  summary: Get account IDs of likes for page
+  operation_id: getPageLikeUsers
+  api_group: Like
+  migration_phase: extract
+  migration_use:
+  - Like extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-like/
+- id: operation-get-pages-id-operations
+  status: reviewed
+  method: GET
+  path: /pages/{id}/operations
+  summary: Get permitted operations for page
+  operation_id: getPageOperations
+  api_group: Operation
+  migration_phase: extract
+  migration_use:
+  - Operation extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-operation/
+- id: redactions-post-pages-id-redact
+  status: reviewed
+  method: POST
+  path: /pages/{id}/redact
+  summary: Redact Content in a Confluence Page
+  operation_id: postRedactPage
+  api_group: Redactions
+  migration_phase: transform
+  migration_use:
+  - Redactions reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-redactions/
+- id: page-put-pages-id-title
+  status: reviewed
+  method: PUT
+  path: /pages/{id}/title
+  summary: Update page title
+  operation_id: updatePageTitle
+  api_group: Page
+  migration_phase: load
+  migration_use:
+  - Page creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-page/
+- id: version-get-pages-id-versions
+  status: reviewed
+  method: GET
+  path: /pages/{id}/versions
+  summary: Get page versions
+  operation_id: getPageVersions
+  api_group: Version
+  migration_phase: extract
+  migration_use:
+  - Version extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-version/
+- id: content-properties-get-pages-page-id-properties
+  status: reviewed
+  method: GET
+  path: /pages/{page-id}/properties
+  summary: Get content properties for page
+  operation_id: getPageContentProperties
+  api_group: Content Properties
+  migration_phase: extract
+  migration_use:
+  - Content Properties extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-post-pages-page-id-properties
+  status: reviewed
+  method: POST
+  path: /pages/{page-id}/properties
+  summary: Create content property for page
+  operation_id: createPageProperty
+  api_group: Content Properties
+  migration_phase: load
+  migration_use:
+  - Content Properties creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+    - write:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-delete-pages-page-id-properties-property-id
+  status: reviewed
+  method: DELETE
+  path: /pages/{page-id}/properties/{property-id}
+  summary: Delete content property for page by id
+  operation_id: deletePagePropertyById
+  api_group: Content Properties
+  migration_phase: reconcile
+  migration_use:
+  - Content Properties reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+    - write:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-get-pages-page-id-properties-property-id
+  status: reviewed
+  method: GET
+  path: /pages/{page-id}/properties/{property-id}
+  summary: Get content property for page by id
+  operation_id: getPageContentPropertiesById
+  api_group: Content Properties
+  migration_phase: extract
+  migration_use:
+  - Content Properties extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-put-pages-page-id-properties-property-id
+  status: reviewed
+  method: PUT
+  path: /pages/{page-id}/properties/{property-id}
+  summary: Update content property for page by id
+  operation_id: updatePagePropertyById
+  api_group: Content Properties
+  migration_phase: load
+  migration_use:
+  - Content Properties creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+    - write:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: version-get-pages-page-id-versions-version-number
+  status: reviewed
+  method: GET
+  path: /pages/{page-id}/versions/{version-number}
+  summary: Get version details for page version
+  operation_id: getPageVersionDetails
+  api_group: Version
+  migration_phase: extract
+  migration_use:
+  - Version extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-version/
+- id: space-permissions-get-space-permissions
+  status: reviewed
+  method: GET
+  path: /space-permissions
+  summary: Get available space permissions
+  operation_id: getAvailableSpacePermissions
+  api_group: Space Permissions
+  migration_phase: extract
+  migration_use:
+  - Space Permissions extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:space.permission:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space-permissions/
+- id: space-permission-transition-post-space-permissions-transition-access-removals
+  status: reviewed
+  method: POST
+  path: /space-permissions/transition/access-removals
+  summary: Bulk remove space permission access
+  operation_id: bulkRemoveSpacePermissionAccess
+  api_group: Space Permission Transition
+  migration_phase: load
+  migration_use:
+  - Space Permission Transition creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:configuration:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space-permission-transition/
+- id: space-permission-transition-get-space-permissions-transition-combinations
+  status: reviewed
+  method: GET
+  path: /space-permissions/transition/combinations
+  summary: List unassigned space permission combinations
+  operation_id: listSpacePermissionCombinations
+  api_group: Space Permission Transition
+  migration_phase: extract
+  migration_use:
+  - Space Permission Transition extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:configuration:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space-permission-transition/
+- id: space-permission-transition-post-space-permissions-transition-combinations
+  status: reviewed
+  method: POST
+  path: /space-permissions/transition/combinations
+  summary: Generate space permission combinations
+  operation_id: generateSpacePermissionCombinations
+  api_group: Space Permission Transition
+  migration_phase: load
+  migration_use:
+  - Space Permission Transition creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:configuration:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space-permission-transition/
+- id: space-permission-transition-post-space-permissions-transition-role-assignments
+  status: reviewed
+  method: POST
+  path: /space-permissions/transition/role-assignments
+  summary: Bulk assign space permission roles
+  operation_id: bulkAssignSpacePermissionRoles
+  api_group: Space Permission Transition
+  migration_phase: load
+  migration_use:
+  - Space Permission Transition creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:configuration:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space-permission-transition/
+- id: space-permission-transition-get-space-permissions-transition-tasks-taskid
+  status: reviewed
+  method: GET
+  path: /space-permissions/transition/tasks/{taskId}
+  summary: Get space permission transition task status
+  operation_id: getSpacePermissionTransitionTaskStatus
+  api_group: Space Permission Transition
+  migration_phase: extract
+  migration_use:
+  - Space Permission Transition extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:configuration:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space-permission-transition/
+- id: space-roles-get-space-role-mode
+  status: reviewed
+  method: GET
+  path: /space-role-mode
+  summary: Get space role mode
+  operation_id: getSpaceRoleMode
+  api_group: Space Roles
+  migration_phase: extract
+  migration_use:
+  - Space Roles extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:configuration:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space-roles/
+- id: space-roles-get-space-roles
+  status: reviewed
+  method: GET
+  path: /space-roles
+  summary: Get available space roles
+  operation_id: getAvailableSpaceRoles
+  api_group: Space Roles
+  migration_phase: extract
+  migration_use:
+  - Space Roles extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:space.permission:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space-roles/
+- id: space-roles-post-space-roles
+  status: reviewed
+  method: POST
+  path: /space-roles
+  summary: Create a space role
+  operation_id: createSpaceRole
+  api_group: Space Roles
+  migration_phase: load
+  migration_use:
+  - Space Roles creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:configuration:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space-roles/
+- id: space-roles-delete-space-roles-id
+  status: reviewed
+  method: DELETE
+  path: /space-roles/{id}
+  summary: Delete a space role
+  operation_id: deleteSpaceRole
+  api_group: Space Roles
+  migration_phase: reconcile
+  migration_use:
+  - Space Roles reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:configuration:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space-roles/
+- id: space-roles-get-space-roles-id
+  status: reviewed
+  method: GET
+  path: /space-roles/{id}
+  summary: Get space role by ID
+  operation_id: getSpaceRolesById
+  api_group: Space Roles
+  migration_phase: extract
+  migration_use:
+  - Space Roles extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:space.permission:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space-roles/
+- id: space-roles-put-space-roles-id
+  status: reviewed
+  method: PUT
+  path: /space-roles/{id}
+  summary: Update a space role
+  operation_id: updateSpaceRole
+  api_group: Space Roles
+  migration_phase: load
+  migration_use:
+  - Space Roles creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:configuration:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space-roles/
+- id: space-get-spaces
+  status: reviewed
+  method: GET
+  path: /spaces
+  summary: Get spaces
+  operation_id: getSpaces
+  api_group: Space
+  migration_phase: extract
+  migration_use:
+  - Space extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:space:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space/
+- id: space-post-spaces
+  status: reviewed
+  method: POST
+  path: /spaces
+  summary: Create space
+  operation_id: createSpace
+  api_group: Space
+  migration_phase: load
+  migration_use:
+  - Space creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:space:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space/
+- id: space-get-spaces-id
+  status: reviewed
+  method: GET
+  path: /spaces/{id}
+  summary: Get space by id
+  operation_id: getSpaceById
+  api_group: Space
+  migration_phase: extract
+  migration_use:
+  - Space extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:space:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space/
+- id: blog-post-get-spaces-id-blogposts
+  status: reviewed
+  method: GET
+  path: /spaces/{id}/blogposts
+  summary: Get blog posts in space
+  operation_id: getBlogPostsInSpace
+  api_group: Blog Post
+  migration_phase: extract
+  migration_use:
+  - Blog Post extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-blog-post/
+- id: classification-level-delete-spaces-id-classification-level-default
+  status: reviewed
+  method: DELETE
+  path: /spaces/{id}/classification-level/default
+  summary: Delete space default classification level
+  operation_id: deleteSpaceDefaultClassificationLevel
+  api_group: Classification Level
+  migration_phase: reconcile
+  migration_use:
+  - Classification Level reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:space:confluence
+    - write:space:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-classification-level/
+- id: classification-level-get-spaces-id-classification-level-default
+  status: reviewed
+  method: GET
+  path: /spaces/{id}/classification-level/default
+  summary: Get space default classification level
+  operation_id: getSpaceDefaultClassificationLevel
+  api_group: Classification Level
+  migration_phase: extract
+  migration_use:
+  - Classification Level extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:space:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-classification-level/
+- id: classification-level-put-spaces-id-classification-level-default
+  status: reviewed
+  method: PUT
+  path: /spaces/{id}/classification-level/default
+  summary: Update space default classification level
+  operation_id: putSpaceDefaultClassificationLevel
+  api_group: Classification Level
+  migration_phase: load
+  migration_use:
+  - Classification Level creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:space:confluence
+    - write:space:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-classification-level/
+- id: label-get-spaces-id-content-labels
+  status: reviewed
+  method: GET
+  path: /spaces/{id}/content/labels
+  summary: Get labels for space content
+  operation_id: getSpaceContentLabels
+  api_group: Label
+  migration_phase: extract
+  migration_use:
+  - Label extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:space:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-label/
+- id: custom-content-get-spaces-id-custom-content
+  status: reviewed
+  method: GET
+  path: /spaces/{id}/custom-content
+  summary: Get custom content by type in space
+  operation_id: getCustomContentByTypeInSpace
+  api_group: Custom Content
+  migration_phase: extract
+  migration_use:
+  - Custom Content extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:custom-content:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-custom-content/
+- id: label-get-spaces-id-labels
+  status: reviewed
+  method: GET
+  path: /spaces/{id}/labels
+  summary: Get labels for space
+  operation_id: getSpaceLabels
+  api_group: Label
+  migration_phase: extract
+  migration_use:
+  - Label extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:space:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-label/
+- id: operation-get-spaces-id-operations
+  status: reviewed
+  method: GET
+  path: /spaces/{id}/operations
+  summary: Get permitted operations for space
+  operation_id: getSpaceOperations
+  api_group: Operation
+  migration_phase: extract
+  migration_use:
+  - Operation extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:space:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-operation/
+- id: page-get-spaces-id-pages
+  status: reviewed
+  method: GET
+  path: /spaces/{id}/pages
+  summary: Get pages in space
+  operation_id: getPagesInSpace
+  api_group: Page
+  migration_phase: extract
+  migration_use:
+  - Page extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:page:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-page/
+- id: space-permissions-get-spaces-id-permissions
+  status: reviewed
+  method: GET
+  path: /spaces/{id}/permissions
+  summary: Get space permissions assignments
+  operation_id: getSpacePermissionsAssignments
+  api_group: Space Permissions
+  migration_phase: extract
+  migration_use:
+  - Space Permissions extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:space:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space-permissions/
+- id: space-roles-get-spaces-id-role-assignments
+  status: reviewed
+  method: GET
+  path: /spaces/{id}/role-assignments
+  summary: Get space role assignments
+  operation_id: getSpaceRoleAssignments
+  api_group: Space Roles
+  migration_phase: extract
+  migration_use:
+  - Space Roles extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:space.permission:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space-roles/
+- id: space-roles-post-spaces-id-role-assignments
+  status: reviewed
+  method: POST
+  path: /spaces/{id}/role-assignments
+  summary: Set space role assignments
+  operation_id: setSpaceRoleAssignments
+  api_group: Space Roles
+  migration_phase: load
+  migration_use:
+  - Space Roles creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:space.permission:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space-roles/
+- id: space-properties-get-spaces-space-id-properties
+  status: reviewed
+  method: GET
+  path: /spaces/{space-id}/properties
+  summary: Get space properties in space
+  operation_id: getSpaceProperties
+  api_group: Space Properties
+  migration_phase: extract
+  migration_use:
+  - Space Properties extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:space:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space-properties/
+- id: space-properties-post-spaces-space-id-properties
+  status: reviewed
+  method: POST
+  path: /spaces/{space-id}/properties
+  summary: Create space property in space
+  operation_id: createSpaceProperty
+  api_group: Space Properties
+  migration_phase: load
+  migration_use:
+  - Space Properties creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:space:confluence
+    - write:space:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space-properties/
+- id: space-properties-delete-spaces-space-id-properties-property-id
+  status: reviewed
+  method: DELETE
+  path: /spaces/{space-id}/properties/{property-id}
+  summary: Delete space property by id
+  operation_id: deleteSpacePropertyById
+  api_group: Space Properties
+  migration_phase: reconcile
+  migration_use:
+  - Space Properties reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:space:confluence
+    - write:space:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space-properties/
+- id: space-properties-get-spaces-space-id-properties-property-id
+  status: reviewed
+  method: GET
+  path: /spaces/{space-id}/properties/{property-id}
+  summary: Get space property by id
+  operation_id: getSpacePropertyById
+  api_group: Space Properties
+  migration_phase: extract
+  migration_use:
+  - Space Properties extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:space:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space-properties/
+- id: space-properties-put-spaces-space-id-properties-property-id
+  status: reviewed
+  method: PUT
+  path: /spaces/{space-id}/properties/{property-id}
+  summary: Update space property by id
+  operation_id: updateSpacePropertyById
+  api_group: Space Properties
+  migration_phase: load
+  migration_use:
+  - Space Properties creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:space:confluence
+    - write:space:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space-properties/
+- id: task-get-tasks
+  status: reviewed
+  method: GET
+  path: /tasks
+  summary: Get tasks
+  operation_id: getTasks
+  api_group: Task
+  migration_phase: extract
+  migration_use:
+  - Task extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:task:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-task/
+- id: task-get-tasks-id
+  status: reviewed
+  method: GET
+  path: /tasks/{id}
+  summary: Get task by id
+  operation_id: getTaskById
+  api_group: Task
+  migration_phase: extract
+  migration_use:
+  - Task extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:task:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-task/
+- id: task-put-tasks-id
+  status: reviewed
+  method: PUT
+  path: /tasks/{id}
+  summary: Update task
+  operation_id: updateTask
+  api_group: Task
+  migration_phase: load
+  migration_use:
+  - Task creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:task:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-task/
+- id: user-post-user-access-check-access-by-email
+  status: reviewed
+  method: POST
+  path: /user/access/check-access-by-email
+  summary: Check site access for a list of emails
+  operation_id: checkAccessByEmail
+  api_group: User
+  migration_phase: transform
+  migration_use:
+  - User reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:configuration:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-user/
+- id: user-post-user-access-invite-by-email
+  status: reviewed
+  method: POST
+  path: /user/access/invite-by-email
+  summary: Invite a list of emails to the site
+  operation_id: inviteByEmail
+  api_group: User
+  migration_phase: transform
+  migration_use:
+  - User reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:configuration:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-user/
+- id: user-post-users-bulk
+  status: reviewed
+  method: POST
+  path: /users-bulk
+  summary: Create bulk user lookup using ids
+  operation_id: createBulkUserLookup
+  api_group: User
+  migration_phase: load
+  migration_use:
+  - User creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:user:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-user/
+- id: whiteboard-post-whiteboards
+  status: reviewed
+  method: POST
+  path: /whiteboards
+  summary: Create whiteboard
+  operation_id: createWhiteboard
+  api_group: Whiteboard
+  migration_phase: load
+  migration_use:
+  - Whiteboard creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:whiteboard:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-whiteboard/
+- id: whiteboard-delete-whiteboards-id
+  status: reviewed
+  method: DELETE
+  path: /whiteboards/{id}
+  summary: Delete whiteboard
+  operation_id: deleteWhiteboard
+  api_group: Whiteboard
+  migration_phase: reconcile
+  migration_use:
+  - Whiteboard reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - delete:whiteboard:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-whiteboard/
+- id: whiteboard-get-whiteboards-id
+  status: reviewed
+  method: GET
+  path: /whiteboards/{id}
+  summary: Get whiteboard by id
+  operation_id: getWhiteboardById
+  api_group: Whiteboard
+  migration_phase: extract
+  migration_use:
+  - Whiteboard extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:whiteboard:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-whiteboard/
+- id: ancestors-get-whiteboards-id-ancestors
+  status: reviewed
+  method: GET
+  path: /whiteboards/{id}/ancestors
+  summary: Get all ancestors of whiteboard
+  operation_id: getWhiteboardAncestors
+  api_group: Ancestors
+  migration_phase: extract
+  migration_use:
+  - Ancestors extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:content.metadata:confluence
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-ancestors/
+- id: classification-level-get-whiteboards-id-classification-level
+  status: reviewed
+  method: GET
+  path: /whiteboards/{id}/classification-level
+  summary: Get whiteboard classification level
+  operation_id: getWhiteboardClassificationLevel
+  api_group: Classification Level
+  migration_phase: extract
+  migration_use:
+  - Classification Level extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:whiteboard:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-classification-level/
+- id: classification-level-put-whiteboards-id-classification-level
+  status: reviewed
+  method: PUT
+  path: /whiteboards/{id}/classification-level
+  summary: Update whiteboard classification level
+  operation_id: putWhiteboardClassificationLevel
+  api_group: Classification Level
+  migration_phase: load
+  migration_use:
+  - Classification Level creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:whiteboard:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-classification-level/
+- id: classification-level-post-whiteboards-id-classification-level-reset
+  status: reviewed
+  method: POST
+  path: /whiteboards/{id}/classification-level/reset
+  summary: Reset whiteboard classification level
+  operation_id: postWhiteboardClassificationLevel
+  api_group: Classification Level
+  migration_phase: transform
+  migration_use:
+  - Classification Level reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:whiteboard:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-classification-level/
+- id: descendants-get-whiteboards-id-descendants
+  status: reviewed
+  method: GET
+  path: /whiteboards/{id}/descendants
+  summary: Get descendants of a whiteboard
+  operation_id: getWhiteboardDescendants
+  api_group: Descendants
+  migration_phase: extract
+  migration_use:
+  - Descendants extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:hierarchical-content:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-descendants/
+- id: children-get-whiteboards-id-direct-children
+  status: reviewed
+  method: GET
+  path: /whiteboards/{id}/direct-children
+  summary: Get direct children of a whiteboard
+  operation_id: getWhiteboardDirectChildren
+  api_group: Children
+  migration_phase: extract
+  migration_use:
+  - Children extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:hierarchical-content:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-children/
+- id: operation-get-whiteboards-id-operations
+  status: reviewed
+  method: GET
+  path: /whiteboards/{id}/operations
+  summary: Get permitted operations for a whiteboard
+  operation_id: getWhiteboardOperations
+  api_group: Operation
+  migration_phase: extract
+  migration_use:
+  - Operation extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:whiteboard:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-operation/
+- id: content-properties-get-whiteboards-id-properties
+  status: reviewed
+  method: GET
+  path: /whiteboards/{id}/properties
+  summary: Get content properties for whiteboard
+  operation_id: getWhiteboardContentProperties
+  api_group: Content Properties
+  migration_phase: extract
+  migration_use:
+  - Content Properties extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:whiteboard:confluence
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-post-whiteboards-id-properties
+  status: reviewed
+  method: POST
+  path: /whiteboards/{id}/properties
+  summary: Create content property for whiteboard
+  operation_id: createWhiteboardProperty
+  api_group: Content Properties
+  migration_phase: load
+  migration_use:
+  - Content Properties creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:whiteboard:confluence
+    - write:whiteboard:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-delete-whiteboards-whiteboard-id-properties-property-id
+  status: reviewed
+  method: DELETE
+  path: /whiteboards/{whiteboard-id}/properties/{property-id}
+  summary: Delete content property for whiteboard by id
+  operation_id: deleteWhiteboardPropertyById
+  api_group: Content Properties
+  migration_phase: reconcile
+  migration_use:
+  - Content Properties reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:whiteboard:confluence
+    - write:whiteboard:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-get-whiteboards-whiteboard-id-properties-property-id
+  status: reviewed
+  method: GET
+  path: /whiteboards/{whiteboard-id}/properties/{property-id}
+  summary: Get content property for whiteboard by id
+  operation_id: getWhiteboardContentPropertiesById
+  api_group: Content Properties
+  migration_phase: extract
+  migration_use:
+  - Content Properties extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:whiteboard:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/
+- id: content-properties-put-whiteboards-whiteboard-id-properties-property-id
+  status: reviewed
+  method: PUT
+  path: /whiteboards/{whiteboard-id}/properties/{property-id}
+  summary: Update content property for whiteboard by id
+  operation_id: updateWhiteboardPropertyById
+  api_group: Content Properties
+  migration_phase: load
+  migration_use:
+  - Content Properties creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:whiteboard:confluence
+    - write:whiteboard:confluence
+  official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-content-properties/

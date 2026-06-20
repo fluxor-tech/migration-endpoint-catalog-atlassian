@@ -31,6 +31,14 @@
       "type": "string",
       "format": "date"
     },
+    "generation": {
+      "type": "object",
+      "properties": {
+        "source": { "type": "string" },
+        "endpoint_count": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": true
+    },
     "endpoints": {
       "type": "array",
       "items": { "$ref": "#/$defs/endpoint" }
@@ -68,6 +76,8 @@
           "pattern": "^/"
         },
         "summary": { "type": "string" },
+        "operation_id": { "type": ["string", "null"] },
+        "api_group": { "type": ["string", "null"] },
         "migration_phase": {
           "type": "string",
           "enum": ["discover", "extract", "transform", "load", "validate", "reconcile"]
@@ -129,4 +139,3 @@
     }
   }
 }
-

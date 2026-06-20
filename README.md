@@ -6,7 +6,7 @@ This repository is not an SDK and does not replace Atlassian's official document
 
 ## Scope
 
-Initial scope:
+Current scope:
 
 - Jira Cloud Platform REST API v3
 - Confluence Cloud REST API v2
@@ -23,6 +23,9 @@ Out of scope for the first pass:
 
 ```text
 catalog/
+  indexes/
+    README.md
+    all-endpoints.csv
   jira-cloud.yml
   confluence-cloud.yml
   jira-service-management-cloud.yml
@@ -36,6 +39,34 @@ schemas/
   endpoint.schema.json
 sources/
   official-docs.md
+  jira-cloud-openapi.json
+  confluence-cloud-openapi.json
+  jira-service-management-cloud-openapi.json
+tools/
+  generate_catalog_from_openapi.py
+  export_catalog_indexes.py
+```
+
+## Coverage
+
+The full catalog is generated from official Atlassian OpenAPI specifications:
+
+| Product | Endpoints |
+| --- | ---: |
+| Jira Cloud | 619 |
+| Confluence Cloud | 218 |
+| Jira Service Management Cloud | 72 |
+| **Total** | **909** |
+
+For spreadsheet review, use `catalog/indexes/all-endpoints.csv`.
+
+## Regeneration
+
+After refreshing the OpenAPI files in `sources/`, regenerate the catalog and index:
+
+```bash
+python tools/generate_catalog_from_openapi.py
+python tools/export_catalog_indexes.py
 ```
 
 ## Entry Model
@@ -62,4 +93,3 @@ Use `schemas/endpoint.schema.json` as the canonical shape for YAML/JSON catalog 
 ## Source Policy
 
 Only add endpoints from official Atlassian documentation unless an entry is clearly marked as tenant-specific evidence in `notes`. Public catalog entries should prefer official docs over observed behavior.
-

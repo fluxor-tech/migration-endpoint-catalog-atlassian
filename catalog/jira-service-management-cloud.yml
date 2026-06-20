@@ -1,95 +1,1264 @@
 vendor: Atlassian
 product: Jira Service Management Cloud
 api_family: Jira Service Management Cloud REST API
-base_url_template: "https://{site}.atlassian.net"
+base_url_template: https://{site}.atlassian.net
 official_docs:
-  root: "https://developer.atlassian.com/cloud/jira/service-desk/rest/"
-catalog_status: starter
-last_reviewed: "2026-06-20"
+  root: https://developer.atlassian.com/cloud/jira/service-desk/rest/
+  authentication: https://developer.atlassian.com/cloud/jira/service-desk/rest/intro/#authentication-and-authorization
+  openapi_source: sources/jira-service-management-cloud-openapi.json
+catalog_status: active
+last_reviewed: '2026-06-20'
+generation:
+  source: official_openapi
+  endpoint_count: 72
 endpoints:
-  - id: jsm-get-service-desks
-    status: reviewed
-    method: GET
-    path: /rest/servicedeskapi/servicedesk
-    summary: List service desks.
-    migration_phase: discover
-    migration_use:
-      - Service project inventory
-      - Portal/request type mapping
-    permissions:
-      - Jira Service Management agent or admin access as required by tenant configuration
-    scopes:
-      classic:
-        - read:servicedesk-request
-    pagination:
-      style: page
-    official_doc_url: "https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/"
-
-  - id: jsm-get-request-types
-    status: reviewed
-    method: GET
-    path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/requesttype
-    summary: List request types for a service desk.
-    migration_phase: discover
-    migration_use:
-      - Request type inventory
-      - Portal form mapping
-      - Intake migration planning
-    permissions:
-      - Access to the service desk
-    scopes:
-      classic:
-        - read:servicedesk-request
-    official_doc_url: "https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-requesttype/"
-
-  - id: jsm-get-request-type-fields
-    status: candidate
-    method: GET
-    path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/requesttype/{requestTypeId}/field
-    summary: Get request type fields.
-    migration_phase: discover
-    migration_use:
-      - Portal field inventory
-      - Required field mapping
-      - Request creation readiness checks
-    permissions:
-      - Access to the service desk
-    scopes:
-      classic:
-        - read:servicedesk-request
-    official_doc_url: "https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-requesttype/"
-
-  - id: jsm-create-request
-    status: reviewed
-    method: POST
-    path: /rest/servicedeskapi/request
-    summary: Create a customer request.
-    migration_phase: load
-    migration_use:
-      - Portal request load
-      - Controlled migration smoke tests
-    permissions:
-      - Customer or agent permission to raise requests
-    scopes:
-      classic:
-        - write:servicedesk-request
-    official_doc_url: "https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/"
-    notes:
-      - Request payload depends on request type fields and required portal fields.
-
-  - id: jsm-get-request
-    status: reviewed
-    method: GET
-    path: /rest/servicedeskapi/request/{issueIdOrKey}
-    summary: Read a customer request.
-    migration_phase: validate
-    migration_use:
-      - Request validation
-      - Portal-facing data checks
-    permissions:
-      - Access to the request
-    scopes:
-      classic:
-        - read:servicedesk-request
-    official_doc_url: "https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/"
-
+- id: assets-get-rest-servicedeskapi-assets-workspace
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/assets/workspace
+  summary: Get assets workspaces
+  operation_id: getAssetsWorkspaces
+  api_group: Assets
+  migration_phase: extract
+  migration_use:
+  - Assets extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-assets/
+- id: customer-post-rest-servicedeskapi-customer
+  status: reviewed
+  method: POST
+  path: /rest/servicedeskapi/customer
+  summary: Create customer
+  operation_id: createCustomer
+  api_group: Customer
+  migration_phase: load
+  migration_use:
+  - Customer creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:servicedesk-customer
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-customer/
+- id: customer-put-rest-servicedeskapi-customer-user-accountid-revoke-portal-only-access
+  status: reviewed
+  method: PUT
+  path: /rest/servicedeskapi/customer/user/{accountId}/revoke-portal-only-access
+  summary: Revoke portal only access for user
+  operation_id: revokePortalOnlyAccessForUser
+  api_group: Customer
+  migration_phase: transform
+  migration_use:
+  - Customer reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:servicedesk-customer
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-customer/
+- id: info-get-rest-servicedeskapi-info
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/info
+  summary: Get info
+  operation_id: getInfo
+  api_group: Info
+  migration_phase: extract
+  migration_use:
+  - Info extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-info/
+- id: assets-get-rest-servicedeskapi-insight-workspace
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/insight/workspace
+  summary: Get insight workspaces
+  operation_id: getInsightWorkspaces
+  api_group: Assets
+  migration_phase: extract
+  migration_use:
+  - Assets extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-assets/
+- id: knowledgebase-get-rest-servicedeskapi-knowledgebase-article
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/knowledgebase/article
+  summary: Get articles
+  operation_id: getArticles
+  api_group: Knowledgebase
+  migration_phase: extract
+  migration_use:
+  - Knowledgebase extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-knowledgebase/
+- id: ungrouped-get-rest-servicedeskapi-knowledgebase-article-view-pageid
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/knowledgebase/article/view/{pageId}
+  summary: View knowledge base article
+  operation_id: viewArticle
+  migration_phase: extract
+  migration_use:
+  - resource extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/
+- id: organization-get-rest-servicedeskapi-organization
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/organization
+  summary: Get organizations
+  operation_id: getOrganizations
+  api_group: Organization
+  migration_phase: extract
+  migration_use:
+  - Organization extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:servicedesk-customer
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-organization/
+- id: organization-post-rest-servicedeskapi-organization
+  status: reviewed
+  method: POST
+  path: /rest/servicedeskapi/organization
+  summary: Create organization
+  operation_id: createOrganization
+  api_group: Organization
+  migration_phase: load
+  migration_use:
+  - Organization creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:servicedesk-customer
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-organization/
+- id: organization-delete-rest-servicedeskapi-organization-organizationid
+  status: reviewed
+  method: DELETE
+  path: /rest/servicedeskapi/organization/{organizationId}
+  summary: Delete organization
+  operation_id: deleteOrganization
+  api_group: Organization
+  migration_phase: reconcile
+  migration_use:
+  - Organization reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:servicedesk-customer
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-organization/
+- id: organization-get-rest-servicedeskapi-organization-organizationid
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/organization/{organizationId}
+  summary: Get organization
+  operation_id: getOrganization
+  api_group: Organization
+  migration_phase: extract
+  migration_use:
+  - Organization extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:servicedesk-customer
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-organization/
+- id: organization-get-rest-servicedeskapi-organization-organizationid-property
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/organization/{organizationId}/property
+  summary: Get properties keys
+  operation_id: getPropertiesKeys
+  api_group: Organization
+  migration_phase: extract
+  migration_use:
+  - Organization extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:servicedesk-customer
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-organization/
+- id: organization-delete-rest-servicedeskapi-organization-organizationid-property-propertykey
+  status: reviewed
+  method: DELETE
+  path: /rest/servicedeskapi/organization/{organizationId}/property/{propertyKey}
+  summary: Delete property
+  operation_id: deleteProperty
+  api_group: Organization
+  migration_phase: reconcile
+  migration_use:
+  - Organization reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:servicedesk-customer
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-organization/
+- id: organization-get-rest-servicedeskapi-organization-organizationid-property-propertykey
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/organization/{organizationId}/property/{propertyKey}
+  summary: Get property
+  operation_id: getProperty
+  api_group: Organization
+  migration_phase: extract
+  migration_use:
+  - Organization extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:servicedesk-customer
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-organization/
+- id: organization-put-rest-servicedeskapi-organization-organizationid-property-propertykey
+  status: reviewed
+  method: PUT
+  path: /rest/servicedeskapi/organization/{organizationId}/property/{propertyKey}
+  summary: Set property
+  operation_id: setProperty
+  api_group: Organization
+  migration_phase: transform
+  migration_use:
+  - Organization reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:servicedesk-customer
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-organization/
+- id: organization-delete-rest-servicedeskapi-organization-organizationid-user
+  status: reviewed
+  method: DELETE
+  path: /rest/servicedeskapi/organization/{organizationId}/user
+  summary: Remove users from organization
+  operation_id: removeUsersFromOrganization
+  api_group: Organization
+  migration_phase: reconcile
+  migration_use:
+  - Organization reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:servicedesk-customer
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-organization/
+- id: organization-get-rest-servicedeskapi-organization-organizationid-user
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/organization/{organizationId}/user
+  summary: Get users in organization
+  operation_id: getUsersInOrganization
+  api_group: Organization
+  migration_phase: extract
+  migration_use:
+  - Organization extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:servicedesk-customer
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-organization/
+- id: organization-post-rest-servicedeskapi-organization-organizationid-user
+  status: reviewed
+  method: POST
+  path: /rest/servicedeskapi/organization/{organizationId}/user
+  summary: Add users to organization
+  operation_id: addUsersToOrganization
+  api_group: Organization
+  migration_phase: load
+  migration_use:
+  - Organization creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:servicedesk-customer
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-organization/
+- id: request-get-rest-servicedeskapi-request
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/request
+  summary: Get customer requests
+  operation_id: getCustomerRequests
+  api_group: Request
+  migration_phase: extract
+  migration_use:
+  - Request extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-post-rest-servicedeskapi-request
+  status: reviewed
+  method: POST
+  path: /rest/servicedeskapi/request
+  summary: Create customer request
+  operation_id: createCustomerRequest
+  api_group: Request
+  migration_phase: load
+  migration_use:
+  - Request creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-get-rest-servicedeskapi-request-issueidorkey
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/request/{issueIdOrKey}
+  summary: Get customer request by id or key
+  operation_id: getCustomerRequestByIdOrKey
+  api_group: Request
+  migration_phase: extract
+  migration_use:
+  - Request extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-get-rest-servicedeskapi-request-issueidorkey-approval
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/request/{issueIdOrKey}/approval
+  summary: Get approvals
+  operation_id: getApprovals
+  api_group: Request
+  migration_phase: extract
+  migration_use:
+  - Request extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-get-rest-servicedeskapi-request-issueidorkey-approval-approvalid
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/request/{issueIdOrKey}/approval/{approvalId}
+  summary: Get approval by id
+  operation_id: getApprovalById
+  api_group: Request
+  migration_phase: extract
+  migration_use:
+  - Request extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-post-rest-servicedeskapi-request-issueidorkey-approval-approvalid
+  status: reviewed
+  method: POST
+  path: /rest/servicedeskapi/request/{issueIdOrKey}/approval/{approvalId}
+  summary: Answer approval
+  operation_id: answerApproval
+  api_group: Request
+  migration_phase: transform
+  migration_use:
+  - Request reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-get-rest-servicedeskapi-request-issueidorkey-attachment
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/request/{issueIdOrKey}/attachment
+  summary: Get attachments for request
+  operation_id: getAttachmentsForRequest
+  api_group: Request
+  migration_phase: extract
+  migration_use:
+  - Request extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-post-rest-servicedeskapi-request-issueidorkey-attachment
+  status: reviewed
+  method: POST
+  path: /rest/servicedeskapi/request/{issueIdOrKey}/attachment
+  summary: Create comment with attachment
+  operation_id: createCommentWithAttachment
+  api_group: Request
+  migration_phase: load
+  migration_use:
+  - Request creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-get-rest-servicedeskapi-request-issueidorkey-attachment-attachmentid
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/request/{issueIdOrKey}/attachment/{attachmentId}
+  summary: Get attachment content
+  operation_id: getAttachmentContent
+  api_group: Request
+  migration_phase: extract
+  migration_use:
+  - Request extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-get-rest-servicedeskapi-request-issueidorkey-attachment-attachmentid-thumbnail
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/request/{issueIdOrKey}/attachment/{attachmentId}/thumbnail
+  summary: Get attachment thumbnail
+  operation_id: getAttachmentThumbnail
+  api_group: Request
+  migration_phase: extract
+  migration_use:
+  - Request extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-get-rest-servicedeskapi-request-issueidorkey-comment
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/request/{issueIdOrKey}/comment
+  summary: Get request comments
+  operation_id: getRequestComments
+  api_group: Request
+  migration_phase: extract
+  migration_use:
+  - Request extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-post-rest-servicedeskapi-request-issueidorkey-comment
+  status: reviewed
+  method: POST
+  path: /rest/servicedeskapi/request/{issueIdOrKey}/comment
+  summary: Create request comment
+  operation_id: createRequestComment
+  api_group: Request
+  migration_phase: load
+  migration_use:
+  - Request creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-get-rest-servicedeskapi-request-issueidorkey-comment-commentid
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/request/{issueIdOrKey}/comment/{commentId}
+  summary: Get request comment by id
+  operation_id: getRequestCommentById
+  api_group: Request
+  migration_phase: extract
+  migration_use:
+  - Request extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-get-rest-servicedeskapi-request-issueidorkey-comment-commentid-attachment
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/request/{issueIdOrKey}/comment/{commentId}/attachment
+  summary: Get comment attachments
+  operation_id: getCommentAttachments
+  api_group: Request
+  migration_phase: extract
+  migration_use:
+  - Request extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:request.attachment:jira-service-management
+    - read:request.comment:jira-service-management
+    - read:user:jira
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-delete-rest-servicedeskapi-request-issueidorkey-notification
+  status: reviewed
+  method: DELETE
+  path: /rest/servicedeskapi/request/{issueIdOrKey}/notification
+  summary: Unsubscribe
+  operation_id: unsubscribe
+  api_group: Request
+  migration_phase: reconcile
+  migration_use:
+  - Request reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-get-rest-servicedeskapi-request-issueidorkey-notification
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/request/{issueIdOrKey}/notification
+  summary: Get subscription status
+  operation_id: getSubscriptionStatus
+  api_group: Request
+  migration_phase: extract
+  migration_use:
+  - Request extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-put-rest-servicedeskapi-request-issueidorkey-notification
+  status: reviewed
+  method: PUT
+  path: /rest/servicedeskapi/request/{issueIdOrKey}/notification
+  summary: Subscribe
+  operation_id: subscribe
+  api_group: Request
+  migration_phase: transform
+  migration_use:
+  - Request reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-delete-rest-servicedeskapi-request-issueidorkey-participant
+  status: reviewed
+  method: DELETE
+  path: /rest/servicedeskapi/request/{issueIdOrKey}/participant
+  summary: Remove request participants
+  operation_id: removeRequestParticipants
+  api_group: Request
+  migration_phase: reconcile
+  migration_use:
+  - Request reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-get-rest-servicedeskapi-request-issueidorkey-participant
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/request/{issueIdOrKey}/participant
+  summary: Get request participants
+  operation_id: getRequestParticipants
+  api_group: Request
+  migration_phase: extract
+  migration_use:
+  - Request extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-post-rest-servicedeskapi-request-issueidorkey-participant
+  status: reviewed
+  method: POST
+  path: /rest/servicedeskapi/request/{issueIdOrKey}/participant
+  summary: Add request participants
+  operation_id: addRequestParticipants
+  api_group: Request
+  migration_phase: load
+  migration_use:
+  - Request creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-get-rest-servicedeskapi-request-issueidorkey-sla
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/request/{issueIdOrKey}/sla
+  summary: Get sla information
+  operation_id: getSlaInformation
+  api_group: Request
+  migration_phase: extract
+  migration_use:
+  - Request extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:jira-work
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-get-rest-servicedeskapi-request-issueidorkey-sla-slametricid
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/request/{issueIdOrKey}/sla/{slaMetricId}
+  summary: Get sla information by id
+  operation_id: getSlaInformationById
+  api_group: Request
+  migration_phase: extract
+  migration_use:
+  - Request extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:jira-work
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-get-rest-servicedeskapi-request-issueidorkey-status
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/request/{issueIdOrKey}/status
+  summary: Get customer request status
+  operation_id: getCustomerRequestStatus
+  api_group: Request
+  migration_phase: extract
+  migration_use:
+  - Request extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-get-rest-servicedeskapi-request-issueidorkey-transition
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/request/{issueIdOrKey}/transition
+  summary: Get customer transitions
+  operation_id: getCustomerTransitions
+  api_group: Request
+  migration_phase: extract
+  migration_use:
+  - Request extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-post-rest-servicedeskapi-request-issueidorkey-transition
+  status: reviewed
+  method: POST
+  path: /rest/servicedeskapi/request/{issueIdOrKey}/transition
+  summary: Perform customer transition
+  operation_id: performCustomerTransition
+  api_group: Request
+  migration_phase: load
+  migration_use:
+  - Request creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-delete-rest-servicedeskapi-request-requestidorkey-feedback
+  status: reviewed
+  method: DELETE
+  path: /rest/servicedeskapi/request/{requestIdOrKey}/feedback
+  summary: Delete feedback
+  operation_id: deleteFeedback
+  api_group: Request
+  migration_phase: reconcile
+  migration_use:
+  - Request reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-get-rest-servicedeskapi-request-requestidorkey-feedback
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/request/{requestIdOrKey}/feedback
+  summary: Get feedback
+  operation_id: getFeedback
+  api_group: Request
+  migration_phase: extract
+  migration_use:
+  - Request extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: request-post-rest-servicedeskapi-request-requestidorkey-feedback
+  status: reviewed
+  method: POST
+  path: /rest/servicedeskapi/request/{requestIdOrKey}/feedback
+  summary: Post feedback
+  operation_id: postFeedback
+  api_group: Request
+  migration_phase: transform
+  migration_use:
+  - Request reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/
+- id: requesttype-get-rest-servicedeskapi-requesttype
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/requesttype
+  summary: Get all request types
+  operation_id: getAllRequestTypes
+  api_group: Requesttype
+  migration_phase: extract
+  migration_use:
+  - Requesttype extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-requesttype/
+- id: servicedesk-get-rest-servicedeskapi-servicedesk
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/servicedesk
+  summary: Get service desks
+  operation_id: getServiceDesks
+  api_group: Servicedesk
+  migration_phase: extract
+  migration_use:
+  - Servicedesk extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/
+- id: servicedesk-get-rest-servicedeskapi-servicedesk-servicedeskid
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}
+  summary: Get service desk by id
+  operation_id: getServiceDeskById
+  api_group: Servicedesk
+  migration_phase: extract
+  migration_use:
+  - Servicedesk extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/
+- id: servicedesk-post-rest-servicedeskapi-servicedesk-servicedeskid-attachtemporaryfile
+  status: reviewed
+  method: POST
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/attachTemporaryFile
+  summary: Attach temporary file
+  operation_id: attachTemporaryFile
+  api_group: Servicedesk
+  migration_phase: transform
+  migration_use:
+  - Servicedesk reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - write:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/
+- id: servicedesk-delete-rest-servicedeskapi-servicedesk-servicedeskid-customer
+  status: reviewed
+  method: DELETE
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/customer
+  summary: Remove customers
+  operation_id: removeCustomers
+  api_group: Servicedesk
+  migration_phase: reconcile
+  migration_use:
+  - Servicedesk reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:servicedesk-customer
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/
+- id: servicedesk-get-rest-servicedeskapi-servicedesk-servicedeskid-customer
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/customer
+  summary: Get customers
+  operation_id: getCustomers
+  api_group: Servicedesk
+  migration_phase: extract
+  migration_use:
+  - Servicedesk extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:servicedesk-customer
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/
+- id: servicedesk-post-rest-servicedeskapi-servicedesk-servicedeskid-customer
+  status: reviewed
+  method: POST
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/customer
+  summary: Add customers
+  operation_id: addCustomers
+  api_group: Servicedesk
+  migration_phase: load
+  migration_use:
+  - Servicedesk creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:servicedesk-customer
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/
+- id: servicedesk-post-rest-servicedeskapi-servicedesk-servicedeskid-customer-invite
+  status: reviewed
+  method: POST
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/customer/invite
+  summary: Invite customer
+  operation_id: inviteCustomer
+  api_group: Servicedesk
+  migration_phase: transform
+  migration_use:
+  - Servicedesk reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:servicedesk-customer
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/
+- id: servicedesk-get-rest-servicedeskapi-servicedesk-servicedeskid-knowledgebase-article
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/knowledgebase/article
+  summary: Get articles
+  operation_id: getArticles
+  api_group: Servicedesk
+  migration_phase: extract
+  migration_use:
+  - Servicedesk extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:knowledgebase:jira-service-management
+  pagination:
+    style: cursor
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/
+- id: organization-delete-rest-servicedeskapi-servicedesk-servicedeskid-organization
+  status: reviewed
+  method: DELETE
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/organization
+  summary: Remove organization
+  operation_id: removeOrganization
+  api_group: Organization
+  migration_phase: reconcile
+  migration_use:
+  - Organization reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:servicedesk-customer
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-organization/
+- id: organization-get-rest-servicedeskapi-servicedesk-servicedeskid-organization
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/organization
+  summary: Get organizations
+  operation_id: getOrganizations
+  api_group: Organization
+  migration_phase: extract
+  migration_use:
+  - Organization extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:servicedesk-customer
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-organization/
+- id: organization-post-rest-servicedeskapi-servicedesk-servicedeskid-organization
+  status: reviewed
+  method: POST
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/organization
+  summary: Add organization
+  operation_id: addOrganization
+  api_group: Organization
+  migration_phase: load
+  migration_use:
+  - Organization creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:servicedesk-customer
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-organization/
+- id: servicedesk-get-rest-servicedeskapi-servicedesk-servicedeskid-queue
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/queue
+  summary: Get queues
+  operation_id: getQueues
+  api_group: Servicedesk
+  migration_phase: extract
+  migration_use:
+  - Servicedesk extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:jira-work
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/
+- id: servicedesk-get-rest-servicedeskapi-servicedesk-servicedeskid-queue-queueid
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/queue/{queueId}
+  summary: Get queue
+  operation_id: getQueue
+  api_group: Servicedesk
+  migration_phase: extract
+  migration_use:
+  - Servicedesk extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:jira-work
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/
+- id: servicedesk-get-rest-servicedeskapi-servicedesk-servicedeskid-queue-queueid-issue
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/queue/{queueId}/issue
+  summary: Get issues in queue
+  operation_id: getIssuesInQueue
+  api_group: Servicedesk
+  migration_phase: extract
+  migration_use:
+  - Servicedesk extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:jira-work
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/
+- id: servicedesk-get-rest-servicedeskapi-servicedesk-servicedeskid-requesttype
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/requesttype
+  summary: Get request types
+  operation_id: getRequestTypes
+  api_group: Servicedesk
+  migration_phase: extract
+  migration_use:
+  - Servicedesk extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/
+- id: servicedesk-post-rest-servicedeskapi-servicedesk-servicedeskid-requesttype
+  status: reviewed
+  method: POST
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/requesttype
+  summary: Create request type
+  operation_id: createRequestType
+  api_group: Servicedesk
+  migration_phase: load
+  migration_use:
+  - Servicedesk creation or update during target load
+  - Post-migration correction or backfill
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:requesttype:jira-service-management
+    - write:requesttype:jira-service-management
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/
+- id: servicedesk-post-rest-servicedeskapi-servicedesk-servicedeskid-requesttype-permissions-check
+  status: reviewed
+  method: POST
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/requesttype/permissions/check
+  summary: Check request type permissions
+  operation_id: checkRequestTypePermissions
+  api_group: Servicedesk
+  migration_phase: transform
+  migration_use:
+  - Servicedesk reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/
+- id: servicedesk-delete-rest-servicedeskapi-servicedesk-servicedeskid-requesttype-requesttypeid
+  status: reviewed
+  method: DELETE
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/requesttype/{requestTypeId}
+  summary: Delete request type
+  operation_id: deleteRequestType
+  api_group: Servicedesk
+  migration_phase: reconcile
+  migration_use:
+  - Servicedesk reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:jira-project
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/
+- id: servicedesk-get-rest-servicedeskapi-servicedesk-servicedeskid-requesttype-requesttypeid
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/requesttype/{requestTypeId}
+  summary: Get request type by id
+  operation_id: getRequestTypeById
+  api_group: Servicedesk
+  migration_phase: extract
+  migration_use:
+  - Servicedesk extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/
+- id: servicedesk-get-rest-servicedeskapi-servicedesk-servicedeskid-requesttype-requesttypeid-field
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/requesttype/{requestTypeId}/field
+  summary: Get request type fields
+  operation_id: getRequestTypeFields
+  api_group: Servicedesk
+  migration_phase: extract
+  migration_use:
+  - Servicedesk extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/
+- id: servicedesk-get-rest-servicedeskapi-servicedesk-servicedeskid-requesttype-requesttypeid-property
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/requesttype/{requestTypeId}/property
+  summary: Get properties keys
+  operation_id: getPropertiesKeys
+  api_group: Servicedesk
+  migration_phase: extract
+  migration_use:
+  - Servicedesk extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/
+- id: servicedesk-delete-rest-servicedeskapi-servicedesk-servicedeskid-requesttype-requesttypeid-property-propertykey
+  status: reviewed
+  method: DELETE
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/requesttype/{requestTypeId}/property/{propertyKey}
+  summary: Delete property
+  operation_id: deleteProperty
+  api_group: Servicedesk
+  migration_phase: reconcile
+  migration_use:
+  - Servicedesk reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:jira-project
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/
+- id: servicedesk-get-rest-servicedeskapi-servicedesk-servicedeskid-requesttype-requesttypeid-property-propertykey
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/requesttype/{requestTypeId}/property/{propertyKey}
+  summary: Get property
+  operation_id: getProperty
+  api_group: Servicedesk
+  migration_phase: extract
+  migration_use:
+  - Servicedesk extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/
+- id: servicedesk-put-rest-servicedeskapi-servicedesk-servicedeskid-requesttype-requesttypeid-property-propertykey
+  status: reviewed
+  method: PUT
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/requesttype/{requestTypeId}/property/{propertyKey}
+  summary: Set property
+  operation_id: setProperty
+  api_group: Servicedesk
+  migration_phase: transform
+  migration_use:
+  - Servicedesk reconciliation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - manage:jira-project
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/
+- id: servicedesk-get-rest-servicedeskapi-servicedesk-servicedeskid-requesttypegroup
+  status: reviewed
+  method: GET
+  path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/requesttypegroup
+  summary: Get request type groups
+  operation_id: getRequestTypeGroups
+  api_group: Servicedesk
+  migration_phase: extract
+  migration_use:
+  - Servicedesk extraction
+  - Source-to-target validation
+  permissions:
+  - See official documentation for product permissions and visibility constraints
+  scopes:
+    granular:
+    - read:servicedesk-request
+  pagination:
+    style: page
+  official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/

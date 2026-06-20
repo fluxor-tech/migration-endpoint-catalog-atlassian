@@ -6,7 +6,13 @@ Primary sources for this catalog:
 - Confluence Cloud REST API v2: <https://developer.atlassian.com/cloud/confluence/rest/v2/>
 - Jira Service Management Cloud REST API: <https://developer.atlassian.com/cloud/jira/service-desk/rest/>
 
-Reference areas used in the starter catalog:
+OpenAPI source files stored in this repository:
+
+- `sources/jira-cloud-openapi.json`
+- `sources/confluence-cloud-openapi.json`
+- `sources/jira-service-management-cloud-openapi.json`
+
+Reference areas covered by the generated catalog include:
 
 - Jira issue search
 - Jira issues
@@ -31,4 +37,3 @@ Reference areas used in the starter catalog:
 2. Prefer product-level REST API documentation over secondary docs or blog posts.
 3. Mark endpoints as `candidate` until their migration purpose and permission model have been reviewed.
 4. Mark endpoints as `validated` only after tenant testing has confirmed request/response behavior.
-
