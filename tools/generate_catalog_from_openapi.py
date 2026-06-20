@@ -60,37 +60,32 @@ def doc_url(root, tags):
     return root.rstrip("/") + f"/api-group-{slugify(tags[0])}/"
 
 
-def migration_phase(method, path, summary):
+def operation_category(method, path, summary):
     text = f"{method} {path} {summary}".lower()
     if method == "GET":
         if any(token in text for token in ["search", "get", "find", "list", "retrieve"]):
-            return "extract"
-        return "discover"
+            return "read"
+        return "read"
     if method in {"POST", "PUT", "PATCH"}:
         if any(token in text for token in ["create", "add", "update", "edit", "transition", "assign", "link", "upload"]):
-            return "load"
-        return "transform"
+            return "write"
+        return "write"
     if method == "DELETE":
-        return "reconcile"
-    return "discover"
+        return "delete"
+    return "other"
 
 
-def migration_use(method, path, summary, tags):
+def use_cases(method, path, summary, tags):
     tag = tags[0] if tags else "resource"
-    uses = []
-    phase = migration_phase(method, path, summary)
-    if phase == "discover":
-        uses.append(f"{tag} inventory and configuration discovery")
-    elif phase == "extract":
-        uses.append(f"{tag} extraction")
-        uses.append("Source-to-target validation")
-    elif phase == "load":
-        uses.append(f"{tag} creation or update during target load")
-        uses.append("Post-migration correction or backfill")
-    elif phase == "validate":
-        uses.append(f"{tag} validation")
+    category = operation_category(method, path, summary)
+    if category == "read":
+        uses = [f"{tag} inventory, lookup, reporting, or validation"]
+    elif category == "write":
+        uses = [f"{tag} creation, update, automation, or backfill"]
+    elif category == "delete":
+        uses = [f"{tag} cleanup, removal, or reconciliation"]
     else:
-        uses.append(f"{tag} reconciliation")
+        uses = [f"{tag} operation"]
     return uses
 
 
@@ -135,8 +130,8 @@ def build_endpoint(root, path, method, operation):
         "summary": summary,
         "operation_id": operation.get("operationId"),
         "api_group": tags[0] if tags else None,
-        "migration_phase": migration_phase(method_upper, path, summary),
-        "migration_use": migration_use(method_upper, path, summary, tags),
+        "operation_category": operation_category(method_upper, path, summary),
+        "use_cases": use_cases(method_upper, path, summary, tags),
         "permissions": ["See official documentation for product permissions and visibility constraints"],
         "scopes": scopes(operation),
         "pagination": None,

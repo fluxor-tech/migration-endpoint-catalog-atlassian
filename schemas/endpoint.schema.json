@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/fluxor-tech/migration-endpoint-catalog-atlassian/schemas/endpoint.schema.json",
-  "title": "Migration Endpoint Catalog",
+  "title": "Endpoint Catalog",
   "type": "object",
   "required": [
     "vendor",
@@ -53,8 +53,8 @@
         "method",
         "path",
         "summary",
-        "migration_phase",
-        "migration_use",
+        "operation_category",
+        "use_cases",
         "permissions",
         "official_doc_url"
       ],
@@ -78,11 +78,11 @@
         "summary": { "type": "string" },
         "operation_id": { "type": ["string", "null"] },
         "api_group": { "type": ["string", "null"] },
-        "migration_phase": {
+        "operation_category": {
           "type": "string",
-          "enum": ["discover", "extract", "transform", "load", "validate", "reconcile"]
+          "enum": ["read", "write", "delete", "other"]
         },
-        "migration_use": {
+        "use_cases": {
           "type": "array",
           "items": { "type": "string" },
           "minItems": 1

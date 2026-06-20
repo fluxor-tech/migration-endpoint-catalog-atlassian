@@ -23,8 +23,8 @@ def iter_endpoints():
                 "method": endpoint["method"],
                 "path": endpoint["path"],
                 "summary": endpoint["summary"],
-                "migration_phase": endpoint["migration_phase"],
-                "migration_use": "; ".join(endpoint.get("migration_use", [])),
+                "operation_category": endpoint["operation_category"],
+                "use_cases": "; ".join(endpoint.get("use_cases", [])),
                 "official_doc_url": endpoint["official_doc_url"],
             }
 
@@ -40,10 +40,10 @@ def main():
         writer.writerows(rows)
 
     by_product = {}
-    by_phase = {}
+    by_category = {}
     for row in rows:
         by_product[row["product"]] = by_product.get(row["product"], 0) + 1
-        by_phase[row["migration_phase"]] = by_phase.get(row["migration_phase"], 0) + 1
+        by_category[row["operation_category"]] = by_category.get(row["operation_category"], 0) + 1
 
     md_lines = [
         "# Atlassian Endpoint Catalog Index",
@@ -59,13 +59,13 @@ def main():
         md_lines.append(f"| {product} | {count} |")
     md_lines.extend([
         "",
-        "## By Migration Phase",
+        "## By Operation Category",
         "",
-        "| Phase | Endpoints |",
+        "| Category | Endpoints |",
         "| --- | ---: |",
     ])
-    for phase, count in sorted(by_phase.items()):
-        md_lines.append(f"| {phase} | {count} |")
+    for category, count in sorted(by_category.items()):
+        md_lines.append(f"| {category} | {count} |")
     md_lines.extend([
         "",
         "## Files",

@@ -1,8 +1,8 @@
-# Atlassian Migration Endpoint Catalog
+# Atlassian Endpoint Catalog
 
-Catalog of Atlassian Cloud REST endpoints useful for migration discovery, extraction, transformation, loading, validation, and post-migration repair.
+Complete catalog of Atlassian Cloud REST endpoints generated from official Atlassian OpenAPI specifications.
 
-This repository is not an SDK and does not replace Atlassian's official documentation. Each catalog entry should link back to the official vendor documentation and explain why the endpoint matters in migration work.
+This repository is not an SDK and does not replace Atlassian's official documentation. Each catalog entry links back to the official vendor documentation and adds a lightweight operational classification for review, automation, integration, reporting, governance, and migration work.
 
 ## Scope
 
@@ -34,7 +34,7 @@ examples/
   responses/
 notes/
   auth-and-permissions.md
-  migration-use-cases.md
+  use-cases.md
 schemas/
   endpoint.schema.json
 sources/
@@ -75,7 +75,7 @@ Each endpoint entry should capture:
 
 - Product and API family
 - Method and path
-- Migration phase and migration use
+- Operation category and common use cases
 - Authentication and permissions/scopes
 - Pagination and rate-limit considerations
 - Official documentation URL
@@ -85,8 +85,8 @@ Use `schemas/endpoint.schema.json` as the canonical shape for YAML/JSON catalog 
 
 ## Status Values
 
-- `candidate`: identified from official docs, not yet reviewed for migration usage.
-- `reviewed`: checked against official docs and migration purpose is clear.
+- `candidate`: identified from official docs, not yet reviewed.
+- `reviewed`: checked against official docs and catalog classification is clear.
 - `validated`: tested against a real tenant with documented behavior.
 - `deprecated`: retained only for historical context.
 

@@ -19,10 +19,9 @@ endpoints:
   summary: Get assets workspaces
   operation_id: getAssetsWorkspaces
   api_group: Assets
-  migration_phase: extract
-  migration_use:
-  - Assets extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Assets inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -38,10 +37,9 @@ endpoints:
   summary: Create customer
   operation_id: createCustomer
   api_group: Customer
-  migration_phase: load
-  migration_use:
-  - Customer creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Customer creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -55,9 +53,9 @@ endpoints:
   summary: Revoke portal only access for user
   operation_id: revokePortalOnlyAccessForUser
   api_group: Customer
-  migration_phase: transform
-  migration_use:
-  - Customer reconciliation
+  operation_category: write
+  use_cases:
+  - Customer creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -71,10 +69,9 @@ endpoints:
   summary: Get info
   operation_id: getInfo
   api_group: Info
-  migration_phase: extract
-  migration_use:
-  - Info extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Info inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   official_doc_url: https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-info/
@@ -85,10 +82,9 @@ endpoints:
   summary: Get insight workspaces
   operation_id: getInsightWorkspaces
   api_group: Assets
-  migration_phase: extract
-  migration_use:
-  - Assets extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Assets inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -104,10 +100,9 @@ endpoints:
   summary: Get articles
   operation_id: getArticles
   api_group: Knowledgebase
-  migration_phase: extract
-  migration_use:
-  - Knowledgebase extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Knowledgebase inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -122,10 +117,9 @@ endpoints:
   path: /rest/servicedeskapi/knowledgebase/article/view/{pageId}
   summary: View knowledge base article
   operation_id: viewArticle
-  migration_phase: extract
-  migration_use:
-  - resource extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - resource inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -139,10 +133,9 @@ endpoints:
   summary: Get organizations
   operation_id: getOrganizations
   api_group: Organization
-  migration_phase: extract
-  migration_use:
-  - Organization extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Organization inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -158,10 +151,9 @@ endpoints:
   summary: Create organization
   operation_id: createOrganization
   api_group: Organization
-  migration_phase: load
-  migration_use:
-  - Organization creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Organization creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -175,9 +167,9 @@ endpoints:
   summary: Delete organization
   operation_id: deleteOrganization
   api_group: Organization
-  migration_phase: reconcile
-  migration_use:
-  - Organization reconciliation
+  operation_category: delete
+  use_cases:
+  - Organization cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -191,10 +183,9 @@ endpoints:
   summary: Get organization
   operation_id: getOrganization
   api_group: Organization
-  migration_phase: extract
-  migration_use:
-  - Organization extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Organization inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -208,10 +199,9 @@ endpoints:
   summary: Get properties keys
   operation_id: getPropertiesKeys
   api_group: Organization
-  migration_phase: extract
-  migration_use:
-  - Organization extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Organization inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -225,9 +215,9 @@ endpoints:
   summary: Delete property
   operation_id: deleteProperty
   api_group: Organization
-  migration_phase: reconcile
-  migration_use:
-  - Organization reconciliation
+  operation_category: delete
+  use_cases:
+  - Organization cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -241,10 +231,9 @@ endpoints:
   summary: Get property
   operation_id: getProperty
   api_group: Organization
-  migration_phase: extract
-  migration_use:
-  - Organization extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Organization inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -258,9 +247,9 @@ endpoints:
   summary: Set property
   operation_id: setProperty
   api_group: Organization
-  migration_phase: transform
-  migration_use:
-  - Organization reconciliation
+  operation_category: write
+  use_cases:
+  - Organization creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -274,9 +263,9 @@ endpoints:
   summary: Remove users from organization
   operation_id: removeUsersFromOrganization
   api_group: Organization
-  migration_phase: reconcile
-  migration_use:
-  - Organization reconciliation
+  operation_category: delete
+  use_cases:
+  - Organization cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -290,10 +279,9 @@ endpoints:
   summary: Get users in organization
   operation_id: getUsersInOrganization
   api_group: Organization
-  migration_phase: extract
-  migration_use:
-  - Organization extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Organization inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -309,10 +297,9 @@ endpoints:
   summary: Add users to organization
   operation_id: addUsersToOrganization
   api_group: Organization
-  migration_phase: load
-  migration_use:
-  - Organization creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Organization creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -326,10 +313,9 @@ endpoints:
   summary: Get customer requests
   operation_id: getCustomerRequests
   api_group: Request
-  migration_phase: extract
-  migration_use:
-  - Request extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Request inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -345,10 +331,9 @@ endpoints:
   summary: Create customer request
   operation_id: createCustomerRequest
   api_group: Request
-  migration_phase: load
-  migration_use:
-  - Request creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Request creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -362,10 +347,9 @@ endpoints:
   summary: Get customer request by id or key
   operation_id: getCustomerRequestByIdOrKey
   api_group: Request
-  migration_phase: extract
-  migration_use:
-  - Request extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Request inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -379,10 +363,9 @@ endpoints:
   summary: Get approvals
   operation_id: getApprovals
   api_group: Request
-  migration_phase: extract
-  migration_use:
-  - Request extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Request inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -398,10 +381,9 @@ endpoints:
   summary: Get approval by id
   operation_id: getApprovalById
   api_group: Request
-  migration_phase: extract
-  migration_use:
-  - Request extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Request inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -415,9 +397,9 @@ endpoints:
   summary: Answer approval
   operation_id: answerApproval
   api_group: Request
-  migration_phase: transform
-  migration_use:
-  - Request reconciliation
+  operation_category: write
+  use_cases:
+  - Request creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -431,10 +413,9 @@ endpoints:
   summary: Get attachments for request
   operation_id: getAttachmentsForRequest
   api_group: Request
-  migration_phase: extract
-  migration_use:
-  - Request extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Request inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -450,10 +431,9 @@ endpoints:
   summary: Create comment with attachment
   operation_id: createCommentWithAttachment
   api_group: Request
-  migration_phase: load
-  migration_use:
-  - Request creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Request creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -467,10 +447,9 @@ endpoints:
   summary: Get attachment content
   operation_id: getAttachmentContent
   api_group: Request
-  migration_phase: extract
-  migration_use:
-  - Request extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Request inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -484,10 +463,9 @@ endpoints:
   summary: Get attachment thumbnail
   operation_id: getAttachmentThumbnail
   api_group: Request
-  migration_phase: extract
-  migration_use:
-  - Request extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Request inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -501,10 +479,9 @@ endpoints:
   summary: Get request comments
   operation_id: getRequestComments
   api_group: Request
-  migration_phase: extract
-  migration_use:
-  - Request extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Request inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -520,10 +497,9 @@ endpoints:
   summary: Create request comment
   operation_id: createRequestComment
   api_group: Request
-  migration_phase: load
-  migration_use:
-  - Request creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Request creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -537,10 +513,9 @@ endpoints:
   summary: Get request comment by id
   operation_id: getRequestCommentById
   api_group: Request
-  migration_phase: extract
-  migration_use:
-  - Request extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Request inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -554,10 +529,9 @@ endpoints:
   summary: Get comment attachments
   operation_id: getCommentAttachments
   api_group: Request
-  migration_phase: extract
-  migration_use:
-  - Request extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Request inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -575,9 +549,9 @@ endpoints:
   summary: Unsubscribe
   operation_id: unsubscribe
   api_group: Request
-  migration_phase: reconcile
-  migration_use:
-  - Request reconciliation
+  operation_category: delete
+  use_cases:
+  - Request cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -591,10 +565,9 @@ endpoints:
   summary: Get subscription status
   operation_id: getSubscriptionStatus
   api_group: Request
-  migration_phase: extract
-  migration_use:
-  - Request extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Request inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -608,9 +581,9 @@ endpoints:
   summary: Subscribe
   operation_id: subscribe
   api_group: Request
-  migration_phase: transform
-  migration_use:
-  - Request reconciliation
+  operation_category: write
+  use_cases:
+  - Request creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -624,9 +597,9 @@ endpoints:
   summary: Remove request participants
   operation_id: removeRequestParticipants
   api_group: Request
-  migration_phase: reconcile
-  migration_use:
-  - Request reconciliation
+  operation_category: delete
+  use_cases:
+  - Request cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -640,10 +613,9 @@ endpoints:
   summary: Get request participants
   operation_id: getRequestParticipants
   api_group: Request
-  migration_phase: extract
-  migration_use:
-  - Request extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Request inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -659,10 +631,9 @@ endpoints:
   summary: Add request participants
   operation_id: addRequestParticipants
   api_group: Request
-  migration_phase: load
-  migration_use:
-  - Request creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Request creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -676,10 +647,9 @@ endpoints:
   summary: Get sla information
   operation_id: getSlaInformation
   api_group: Request
-  migration_phase: extract
-  migration_use:
-  - Request extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Request inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -695,10 +665,9 @@ endpoints:
   summary: Get sla information by id
   operation_id: getSlaInformationById
   api_group: Request
-  migration_phase: extract
-  migration_use:
-  - Request extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Request inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -712,10 +681,9 @@ endpoints:
   summary: Get customer request status
   operation_id: getCustomerRequestStatus
   api_group: Request
-  migration_phase: extract
-  migration_use:
-  - Request extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Request inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -731,10 +699,9 @@ endpoints:
   summary: Get customer transitions
   operation_id: getCustomerTransitions
   api_group: Request
-  migration_phase: extract
-  migration_use:
-  - Request extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Request inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -750,10 +717,9 @@ endpoints:
   summary: Perform customer transition
   operation_id: performCustomerTransition
   api_group: Request
-  migration_phase: load
-  migration_use:
-  - Request creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Request creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -767,9 +733,9 @@ endpoints:
   summary: Delete feedback
   operation_id: deleteFeedback
   api_group: Request
-  migration_phase: reconcile
-  migration_use:
-  - Request reconciliation
+  operation_category: delete
+  use_cases:
+  - Request cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -783,10 +749,9 @@ endpoints:
   summary: Get feedback
   operation_id: getFeedback
   api_group: Request
-  migration_phase: extract
-  migration_use:
-  - Request extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Request inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -800,9 +765,9 @@ endpoints:
   summary: Post feedback
   operation_id: postFeedback
   api_group: Request
-  migration_phase: transform
-  migration_use:
-  - Request reconciliation
+  operation_category: write
+  use_cases:
+  - Request creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -816,10 +781,9 @@ endpoints:
   summary: Get all request types
   operation_id: getAllRequestTypes
   api_group: Requesttype
-  migration_phase: extract
-  migration_use:
-  - Requesttype extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Requesttype inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -835,10 +799,9 @@ endpoints:
   summary: Get service desks
   operation_id: getServiceDesks
   api_group: Servicedesk
-  migration_phase: extract
-  migration_use:
-  - Servicedesk extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Servicedesk inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -854,10 +817,9 @@ endpoints:
   summary: Get service desk by id
   operation_id: getServiceDeskById
   api_group: Servicedesk
-  migration_phase: extract
-  migration_use:
-  - Servicedesk extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Servicedesk inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -871,9 +833,9 @@ endpoints:
   summary: Attach temporary file
   operation_id: attachTemporaryFile
   api_group: Servicedesk
-  migration_phase: transform
-  migration_use:
-  - Servicedesk reconciliation
+  operation_category: write
+  use_cases:
+  - Servicedesk creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -887,9 +849,9 @@ endpoints:
   summary: Remove customers
   operation_id: removeCustomers
   api_group: Servicedesk
-  migration_phase: reconcile
-  migration_use:
-  - Servicedesk reconciliation
+  operation_category: delete
+  use_cases:
+  - Servicedesk cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -903,10 +865,9 @@ endpoints:
   summary: Get customers
   operation_id: getCustomers
   api_group: Servicedesk
-  migration_phase: extract
-  migration_use:
-  - Servicedesk extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Servicedesk inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -922,10 +883,9 @@ endpoints:
   summary: Add customers
   operation_id: addCustomers
   api_group: Servicedesk
-  migration_phase: load
-  migration_use:
-  - Servicedesk creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Servicedesk creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -939,9 +899,9 @@ endpoints:
   summary: Invite customer
   operation_id: inviteCustomer
   api_group: Servicedesk
-  migration_phase: transform
-  migration_use:
-  - Servicedesk reconciliation
+  operation_category: write
+  use_cases:
+  - Servicedesk creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -955,10 +915,9 @@ endpoints:
   summary: Get articles
   operation_id: getArticles
   api_group: Servicedesk
-  migration_phase: extract
-  migration_use:
-  - Servicedesk extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Servicedesk inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -974,9 +933,9 @@ endpoints:
   summary: Remove organization
   operation_id: removeOrganization
   api_group: Organization
-  migration_phase: reconcile
-  migration_use:
-  - Organization reconciliation
+  operation_category: delete
+  use_cases:
+  - Organization cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -990,10 +949,9 @@ endpoints:
   summary: Get organizations
   operation_id: getOrganizations
   api_group: Organization
-  migration_phase: extract
-  migration_use:
-  - Organization extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Organization inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1009,10 +967,9 @@ endpoints:
   summary: Add organization
   operation_id: addOrganization
   api_group: Organization
-  migration_phase: load
-  migration_use:
-  - Organization creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Organization creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1026,10 +983,9 @@ endpoints:
   summary: Get queues
   operation_id: getQueues
   api_group: Servicedesk
-  migration_phase: extract
-  migration_use:
-  - Servicedesk extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Servicedesk inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1045,10 +1001,9 @@ endpoints:
   summary: Get queue
   operation_id: getQueue
   api_group: Servicedesk
-  migration_phase: extract
-  migration_use:
-  - Servicedesk extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Servicedesk inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1062,10 +1017,9 @@ endpoints:
   summary: Get issues in queue
   operation_id: getIssuesInQueue
   api_group: Servicedesk
-  migration_phase: extract
-  migration_use:
-  - Servicedesk extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Servicedesk inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1081,10 +1035,9 @@ endpoints:
   summary: Get request types
   operation_id: getRequestTypes
   api_group: Servicedesk
-  migration_phase: extract
-  migration_use:
-  - Servicedesk extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Servicedesk inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1100,10 +1053,9 @@ endpoints:
   summary: Create request type
   operation_id: createRequestType
   api_group: Servicedesk
-  migration_phase: load
-  migration_use:
-  - Servicedesk creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Servicedesk creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1118,9 +1070,9 @@ endpoints:
   summary: Check request type permissions
   operation_id: checkRequestTypePermissions
   api_group: Servicedesk
-  migration_phase: transform
-  migration_use:
-  - Servicedesk reconciliation
+  operation_category: write
+  use_cases:
+  - Servicedesk creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1134,9 +1086,9 @@ endpoints:
   summary: Delete request type
   operation_id: deleteRequestType
   api_group: Servicedesk
-  migration_phase: reconcile
-  migration_use:
-  - Servicedesk reconciliation
+  operation_category: delete
+  use_cases:
+  - Servicedesk cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1150,10 +1102,9 @@ endpoints:
   summary: Get request type by id
   operation_id: getRequestTypeById
   api_group: Servicedesk
-  migration_phase: extract
-  migration_use:
-  - Servicedesk extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Servicedesk inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1167,10 +1118,9 @@ endpoints:
   summary: Get request type fields
   operation_id: getRequestTypeFields
   api_group: Servicedesk
-  migration_phase: extract
-  migration_use:
-  - Servicedesk extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Servicedesk inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1184,10 +1134,9 @@ endpoints:
   summary: Get properties keys
   operation_id: getPropertiesKeys
   api_group: Servicedesk
-  migration_phase: extract
-  migration_use:
-  - Servicedesk extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Servicedesk inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1201,9 +1150,9 @@ endpoints:
   summary: Delete property
   operation_id: deleteProperty
   api_group: Servicedesk
-  migration_phase: reconcile
-  migration_use:
-  - Servicedesk reconciliation
+  operation_category: delete
+  use_cases:
+  - Servicedesk cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1217,10 +1166,9 @@ endpoints:
   summary: Get property
   operation_id: getProperty
   api_group: Servicedesk
-  migration_phase: extract
-  migration_use:
-  - Servicedesk extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Servicedesk inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1234,9 +1182,9 @@ endpoints:
   summary: Set property
   operation_id: setProperty
   api_group: Servicedesk
-  migration_phase: transform
-  migration_use:
-  - Servicedesk reconciliation
+  operation_category: write
+  use_cases:
+  - Servicedesk creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1250,10 +1198,9 @@ endpoints:
   summary: Get request type groups
   operation_id: getRequestTypeGroups
   api_group: Servicedesk
-  migration_phase: extract
-  migration_use:
-  - Servicedesk extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Servicedesk inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:

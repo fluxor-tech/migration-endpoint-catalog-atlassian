@@ -35,5 +35,5 @@ Reference areas covered by the generated catalog include:
 
 1. Every endpoint must include an `official_doc_url`.
 2. Prefer product-level REST API documentation over secondary docs or blog posts.
-3. Mark endpoints as `candidate` until their migration purpose and permission model have been reviewed.
+3. Mark endpoints as `candidate` until their classification and permission model have been reviewed.
 4. Mark endpoints as `validated` only after tenant testing has confirmed request/response behavior.

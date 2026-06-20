@@ -10,14 +10,13 @@ Total endpoints: 909
 | Jira Cloud | 619 |
 | Jira Service Management Cloud | 72 |
 
-## By Migration Phase
+## By Operation Category
 
-| Phase | Endpoints |
+| Category | Endpoints |
 | --- | ---: |
-| extract | 451 |
-| load | 204 |
-| reconcile | 124 |
-| transform | 130 |
+| delete | 124 |
+| read | 451 |
+| write | 334 |
 
 ## Files
 

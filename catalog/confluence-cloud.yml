@@ -19,9 +19,9 @@ endpoints:
   summary: Disable Admin Key
   operation_id: disableAdminKey
   api_group: Admin Key
-  migration_phase: reconcile
-  migration_use:
-  - Admin Key reconciliation
+  operation_category: delete
+  use_cases:
+  - Admin Key cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-admin-key/
@@ -32,10 +32,9 @@ endpoints:
   summary: Get Admin Key
   operation_id: getAdminKey
   api_group: Admin Key
-  migration_phase: extract
-  migration_use:
-  - Admin Key extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Admin Key inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-admin-key/
@@ -46,9 +45,9 @@ endpoints:
   summary: Enable Admin Key
   operation_id: enableAdminKey
   api_group: Admin Key
-  migration_phase: transform
-  migration_use:
-  - Admin Key reconciliation
+  operation_category: write
+  use_cases:
+  - Admin Key creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   official_doc_url: https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-admin-key/
@@ -59,10 +58,9 @@ endpoints:
   summary: Get Forge app properties.
   operation_id: getForgeAppProperties
   api_group: App Properties
-  migration_phase: extract
-  migration_use:
-  - App Properties extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - App Properties inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -78,9 +76,9 @@ endpoints:
   summary: Deletes a Forge app property.
   operation_id: deleteForgeAppProperty
   api_group: App Properties
-  migration_phase: reconcile
-  migration_use:
-  - App Properties reconciliation
+  operation_category: delete
+  use_cases:
+  - App Properties cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -94,10 +92,9 @@ endpoints:
   summary: Get a Forge app property by key.
   operation_id: getForgeAppProperty
   api_group: App Properties
-  migration_phase: extract
-  migration_use:
-  - App Properties extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - App Properties inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -111,10 +108,9 @@ endpoints:
   summary: Create or update a Forge app property.
   operation_id: putForgeAppProperty
   api_group: App Properties
-  migration_phase: load
-  migration_use:
-  - App Properties creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - App Properties creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -128,10 +124,9 @@ endpoints:
   summary: Get attachments
   operation_id: getAttachments
   api_group: Attachment
-  migration_phase: extract
-  migration_use:
-  - Attachment extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Attachment inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -147,10 +142,9 @@ endpoints:
   summary: Get content properties for attachment
   operation_id: getAttachmentContentProperties
   api_group: Content Properties
-  migration_phase: extract
-  migration_use:
-  - Content Properties extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Content Properties inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -166,10 +160,9 @@ endpoints:
   summary: Create content property for attachment
   operation_id: createAttachmentProperty
   api_group: Content Properties
-  migration_phase: load
-  migration_use:
-  - Content Properties creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Content Properties creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -184,9 +177,9 @@ endpoints:
   summary: Delete content property for attachment by id
   operation_id: deleteAttachmentPropertyById
   api_group: Content Properties
-  migration_phase: reconcile
-  migration_use:
-  - Content Properties reconciliation
+  operation_category: delete
+  use_cases:
+  - Content Properties cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -201,10 +194,9 @@ endpoints:
   summary: Get content property for attachment by id
   operation_id: getAttachmentContentPropertiesById
   api_group: Content Properties
-  migration_phase: extract
-  migration_use:
-  - Content Properties extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Content Properties inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -218,10 +210,9 @@ endpoints:
   summary: Update content property for attachment by id
   operation_id: updateAttachmentPropertyById
   api_group: Content Properties
-  migration_phase: load
-  migration_use:
-  - Content Properties creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Content Properties creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -236,10 +227,9 @@ endpoints:
   summary: Get version details for attachment version
   operation_id: getAttachmentVersionDetails
   api_group: Version
-  migration_phase: extract
-  migration_use:
-  - Version extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Version inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -253,9 +243,9 @@ endpoints:
   summary: Delete attachment
   operation_id: deleteAttachment
   api_group: Attachment
-  migration_phase: reconcile
-  migration_use:
-  - Attachment reconciliation
+  operation_category: delete
+  use_cases:
+  - Attachment cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -269,10 +259,9 @@ endpoints:
   summary: Get attachment by id
   operation_id: getAttachmentById
   api_group: Attachment
-  migration_phase: extract
-  migration_use:
-  - Attachment extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Attachment inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -286,10 +275,9 @@ endpoints:
   summary: Get attachment comments
   operation_id: getAttachmentComments
   api_group: Comment
-  migration_phase: extract
-  migration_use:
-  - Comment extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Comment inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -305,10 +293,9 @@ endpoints:
   summary: Get labels for attachment
   operation_id: getAttachmentLabels
   api_group: Label
-  migration_phase: extract
-  migration_use:
-  - Label extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Label inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -324,10 +311,9 @@ endpoints:
   summary: Get permitted operations for attachment
   operation_id: getAttachmentOperations
   api_group: Operation
-  migration_phase: extract
-  migration_use:
-  - Operation extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Operation inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -341,10 +327,9 @@ endpoints:
   summary: Download attachment thumbnail by id
   operation_id: getAttachmentThumbnailById
   api_group: Attachment
-  migration_phase: extract
-  migration_use:
-  - Attachment extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Attachment inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -358,10 +343,9 @@ endpoints:
   summary: Get attachment versions
   operation_id: getAttachmentVersions
   api_group: Version
-  migration_phase: extract
-  migration_use:
-  - Version extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Version inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -377,10 +361,9 @@ endpoints:
   summary: Get blog posts
   operation_id: getBlogPosts
   api_group: Blog Post
-  migration_phase: extract
-  migration_use:
-  - Blog Post extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Blog Post inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -396,10 +379,9 @@ endpoints:
   summary: Create blog post
   operation_id: createBlogPost
   api_group: Blog Post
-  migration_phase: load
-  migration_use:
-  - Blog Post creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Blog Post creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -413,10 +395,9 @@ endpoints:
   summary: Get content properties for blog post
   operation_id: getBlogpostContentProperties
   api_group: Content Properties
-  migration_phase: extract
-  migration_use:
-  - Content Properties extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Content Properties inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -432,10 +413,9 @@ endpoints:
   summary: Create content property for blog post
   operation_id: createBlogpostProperty
   api_group: Content Properties
-  migration_phase: load
-  migration_use:
-  - Content Properties creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Content Properties creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -450,9 +430,9 @@ endpoints:
   summary: Delete content property for blogpost by id
   operation_id: deleteBlogpostPropertyById
   api_group: Content Properties
-  migration_phase: reconcile
-  migration_use:
-  - Content Properties reconciliation
+  operation_category: delete
+  use_cases:
+  - Content Properties cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -467,10 +447,9 @@ endpoints:
   summary: Get content property for blog post by id
   operation_id: getBlogpostContentPropertiesById
   api_group: Content Properties
-  migration_phase: extract
-  migration_use:
-  - Content Properties extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Content Properties inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -484,10 +463,9 @@ endpoints:
   summary: Update content property for blog post by id
   operation_id: updateBlogpostPropertyById
   api_group: Content Properties
-  migration_phase: load
-  migration_use:
-  - Content Properties creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Content Properties creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -502,10 +480,9 @@ endpoints:
   summary: Get version details for blog post version
   operation_id: getBlogPostVersionDetails
   api_group: Version
-  migration_phase: extract
-  migration_use:
-  - Version extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Version inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -519,9 +496,9 @@ endpoints:
   summary: Delete blog post
   operation_id: deleteBlogPost
   api_group: Blog Post
-  migration_phase: reconcile
-  migration_use:
-  - Blog Post reconciliation
+  operation_category: delete
+  use_cases:
+  - Blog Post cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -535,10 +512,9 @@ endpoints:
   summary: Get blog post by id
   operation_id: getBlogPostById
   api_group: Blog Post
-  migration_phase: extract
-  migration_use:
-  - Blog Post extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Blog Post inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -552,10 +528,9 @@ endpoints:
   summary: Update blog post
   operation_id: updateBlogPost
   api_group: Blog Post
-  migration_phase: load
-  migration_use:
-  - Blog Post creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Blog Post creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -569,10 +544,9 @@ endpoints:
   summary: Get attachments for blog post
   operation_id: getBlogpostAttachments
   api_group: Attachment
-  migration_phase: extract
-  migration_use:
-  - Attachment extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Attachment inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -588,10 +562,9 @@ endpoints:
   summary: Get blog post classification level
   operation_id: getBlogPostClassificationLevel
   api_group: Classification Level
-  migration_phase: extract
-  migration_use:
-  - Classification Level extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Classification Level inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -606,10 +579,9 @@ endpoints:
   summary: Update blog post classification level
   operation_id: putBlogPostClassificationLevel
   api_group: Classification Level
-  migration_phase: load
-  migration_use:
-  - Classification Level creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Classification Level creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -623,9 +595,9 @@ endpoints:
   summary: Reset blog post classification level
   operation_id: postBlogPostClassificationLevel
   api_group: Classification Level
-  migration_phase: transform
-  migration_use:
-  - Classification Level reconciliation
+  operation_category: write
+  use_cases:
+  - Classification Level creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -639,10 +611,9 @@ endpoints:
   summary: Get custom content by type in blog post
   operation_id: getCustomContentByTypeInBlogPost
   api_group: Custom Content
-  migration_phase: extract
-  migration_use:
-  - Custom Content extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Custom Content inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -658,10 +629,9 @@ endpoints:
   summary: Get footer comments for blog post
   operation_id: getBlogPostFooterComments
   api_group: Comment
-  migration_phase: extract
-  migration_use:
-  - Comment extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Comment inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -677,10 +647,9 @@ endpoints:
   summary: Get inline comments for blog post
   operation_id: getBlogPostInlineComments
   api_group: Comment
-  migration_phase: extract
-  migration_use:
-  - Comment extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Comment inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -696,10 +665,9 @@ endpoints:
   summary: Get labels for blog post
   operation_id: getBlogPostLabels
   api_group: Label
-  migration_phase: extract
-  migration_use:
-  - Label extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Label inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -715,10 +683,9 @@ endpoints:
   summary: Get like count for blog post
   operation_id: getBlogPostLikeCount
   api_group: Like
-  migration_phase: extract
-  migration_use:
-  - Like extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Like inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -732,10 +699,9 @@ endpoints:
   summary: Get account IDs of likes for blog post
   operation_id: getBlogPostLikeUsers
   api_group: Like
-  migration_phase: extract
-  migration_use:
-  - Like extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Like inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -751,10 +717,9 @@ endpoints:
   summary: Get permitted operations for blog post
   operation_id: getBlogPostOperations
   api_group: Operation
-  migration_phase: extract
-  migration_use:
-  - Operation extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Operation inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -768,9 +733,9 @@ endpoints:
   summary: Redact Content in a Confluence Blog Post
   operation_id: postRedactBlog
   api_group: Redactions
-  migration_phase: transform
-  migration_use:
-  - Redactions reconciliation
+  operation_category: write
+  use_cases:
+  - Redactions creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -784,10 +749,9 @@ endpoints:
   summary: Get blog post versions
   operation_id: getBlogPostVersions
   api_group: Version
-  migration_phase: extract
-  migration_use:
-  - Version extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Version inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -803,10 +767,9 @@ endpoints:
   summary: Get list of classification levels
   operation_id: getClassificationLevels
   api_group: Classification Level
-  migration_phase: extract
-  migration_use:
-  - Classification Level extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Classification Level inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -820,10 +783,9 @@ endpoints:
   summary: Get content properties for comment
   operation_id: getCommentContentProperties
   api_group: Content Properties
-  migration_phase: extract
-  migration_use:
-  - Content Properties extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Content Properties inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -839,10 +801,9 @@ endpoints:
   summary: Create content property for comment
   operation_id: createCommentProperty
   api_group: Content Properties
-  migration_phase: load
-  migration_use:
-  - Content Properties creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Content Properties creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -857,9 +818,9 @@ endpoints:
   summary: Delete content property for comment by id
   operation_id: deleteCommentPropertyById
   api_group: Content Properties
-  migration_phase: reconcile
-  migration_use:
-  - Content Properties reconciliation
+  operation_category: delete
+  use_cases:
+  - Content Properties cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -874,10 +835,9 @@ endpoints:
   summary: Get content property for comment by id
   operation_id: getCommentContentPropertiesById
   api_group: Content Properties
-  migration_phase: extract
-  migration_use:
-  - Content Properties extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Content Properties inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -891,10 +851,9 @@ endpoints:
   summary: Update content property for comment by id
   operation_id: updateCommentPropertyById
   api_group: Content Properties
-  migration_phase: load
-  migration_use:
-  - Content Properties creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Content Properties creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -909,9 +868,9 @@ endpoints:
   summary: Convert content ids to content types
   operation_id: convertContentIdsToContentTypes
   api_group: Content
-  migration_phase: transform
-  migration_use:
-  - Content reconciliation
+  operation_category: write
+  use_cases:
+  - Content creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -925,10 +884,9 @@ endpoints:
   summary: Get custom content by type
   operation_id: getCustomContentByType
   api_group: Custom Content
-  migration_phase: extract
-  migration_use:
-  - Custom Content extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Custom Content inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -944,10 +902,9 @@ endpoints:
   summary: Create custom content
   operation_id: createCustomContent
   api_group: Custom Content
-  migration_phase: load
-  migration_use:
-  - Custom Content creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Custom Content creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -961,10 +918,9 @@ endpoints:
   summary: Get content properties for custom content
   operation_id: getCustomContentContentProperties
   api_group: Content Properties
-  migration_phase: extract
-  migration_use:
-  - Content Properties extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Content Properties inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -980,10 +936,9 @@ endpoints:
   summary: Create content property for custom content
   operation_id: createCustomContentProperty
   api_group: Content Properties
-  migration_phase: load
-  migration_use:
-  - Content Properties creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Content Properties creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -998,9 +953,9 @@ endpoints:
   summary: Delete content property for custom content by id
   operation_id: deleteCustomContentPropertyById
   api_group: Content Properties
-  migration_phase: reconcile
-  migration_use:
-  - Content Properties reconciliation
+  operation_category: delete
+  use_cases:
+  - Content Properties cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1015,10 +970,9 @@ endpoints:
   summary: Get content property for custom content by id
   operation_id: getCustomContentContentPropertiesById
   api_group: Content Properties
-  migration_phase: extract
-  migration_use:
-  - Content Properties extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Content Properties inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1032,10 +986,9 @@ endpoints:
   summary: Update content property for custom content by id
   operation_id: updateCustomContentPropertyById
   api_group: Content Properties
-  migration_phase: load
-  migration_use:
-  - Content Properties creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Content Properties creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1050,10 +1003,9 @@ endpoints:
   summary: Get custom content versions
   operation_id: getCustomContentVersions
   api_group: Version
-  migration_phase: extract
-  migration_use:
-  - Version extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Version inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1069,10 +1021,9 @@ endpoints:
   summary: Get version details for custom content version
   operation_id: getCustomContentVersionDetails
   api_group: Version
-  migration_phase: extract
-  migration_use:
-  - Version extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Version inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1086,9 +1037,9 @@ endpoints:
   summary: Delete custom content
   operation_id: deleteCustomContent
   api_group: Custom Content
-  migration_phase: reconcile
-  migration_use:
-  - Custom Content reconciliation
+  operation_category: delete
+  use_cases:
+  - Custom Content cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1102,10 +1053,9 @@ endpoints:
   summary: Get custom content by id
   operation_id: getCustomContentById
   api_group: Custom Content
-  migration_phase: extract
-  migration_use:
-  - Custom Content extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Custom Content inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1119,10 +1069,9 @@ endpoints:
   summary: Update custom content
   operation_id: updateCustomContent
   api_group: Custom Content
-  migration_phase: load
-  migration_use:
-  - Custom Content creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Custom Content creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1136,10 +1085,9 @@ endpoints:
   summary: Get attachments for custom content
   operation_id: getCustomContentAttachments
   api_group: Attachment
-  migration_phase: extract
-  migration_use:
-  - Attachment extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Attachment inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1155,10 +1103,9 @@ endpoints:
   summary: Get child custom content
   operation_id: getChildCustomContent
   api_group: Children
-  migration_phase: extract
-  migration_use:
-  - Children extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Children inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1174,10 +1121,9 @@ endpoints:
   summary: Get custom content comments
   operation_id: getCustomContentComments
   api_group: Comment
-  migration_phase: extract
-  migration_use:
-  - Comment extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Comment inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1193,10 +1139,9 @@ endpoints:
   summary: Get labels for custom content
   operation_id: getCustomContentLabels
   api_group: Label
-  migration_phase: extract
-  migration_use:
-  - Label extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Label inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1212,10 +1157,9 @@ endpoints:
   summary: Get permitted operations for custom content
   operation_id: getCustomContentOperations
   api_group: Operation
-  migration_phase: extract
-  migration_use:
-  - Operation extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Operation inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1229,10 +1173,9 @@ endpoints:
   summary: Get data policy metadata for the workspace
   operation_id: getDataPolicyMetadata
   api_group: Data Policies
-  migration_phase: extract
-  migration_use:
-  - Data Policies extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Data Policies inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1246,10 +1189,9 @@ endpoints:
   summary: Get spaces with data policies
   operation_id: getDataPolicySpaces
   api_group: Data Policies
-  migration_phase: extract
-  migration_use:
-  - Data Policies extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Data Policies inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1265,10 +1207,9 @@ endpoints:
   summary: Create database
   operation_id: createDatabase
   api_group: Database
-  migration_phase: load
-  migration_use:
-  - Database creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Database creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1282,9 +1223,9 @@ endpoints:
   summary: Delete content property for database by id
   operation_id: deleteDatabasePropertyById
   api_group: Content Properties
-  migration_phase: reconcile
-  migration_use:
-  - Content Properties reconciliation
+  operation_category: delete
+  use_cases:
+  - Content Properties cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1299,10 +1240,9 @@ endpoints:
   summary: Get content property for database by id
   operation_id: getDatabaseContentPropertiesById
   api_group: Content Properties
-  migration_phase: extract
-  migration_use:
-  - Content Properties extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Content Properties inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1316,10 +1256,9 @@ endpoints:
   summary: Update content property for database by id
   operation_id: updateDatabasePropertyById
   api_group: Content Properties
-  migration_phase: load
-  migration_use:
-  - Content Properties creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Content Properties creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1334,9 +1273,9 @@ endpoints:
   summary: Delete database
   operation_id: deleteDatabase
   api_group: Database
-  migration_phase: reconcile
-  migration_use:
-  - Database reconciliation
+  operation_category: delete
+  use_cases:
+  - Database cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1350,10 +1289,9 @@ endpoints:
   summary: Get database by id
   operation_id: getDatabaseById
   api_group: Database
-  migration_phase: extract
-  migration_use:
-  - Database extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Database inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1367,10 +1305,9 @@ endpoints:
   summary: Get all ancestors of database
   operation_id: getDatabaseAncestors
   api_group: Ancestors
-  migration_phase: extract
-  migration_use:
-  - Ancestors extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Ancestors inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1386,10 +1323,9 @@ endpoints:
   summary: Get database classification level
   operation_id: getDatabaseClassificationLevel
   api_group: Classification Level
-  migration_phase: extract
-  migration_use:
-  - Classification Level extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Classification Level inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1403,10 +1339,9 @@ endpoints:
   summary: Update database classification level
   operation_id: putDatabaseClassificationLevel
   api_group: Classification Level
-  migration_phase: load
-  migration_use:
-  - Classification Level creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Classification Level creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1420,9 +1355,9 @@ endpoints:
   summary: Reset database classification level
   operation_id: postDatabaseClassificationLevel
   api_group: Classification Level
-  migration_phase: transform
-  migration_use:
-  - Classification Level reconciliation
+  operation_category: write
+  use_cases:
+  - Classification Level creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1436,10 +1371,9 @@ endpoints:
   summary: Get descendants of a database
   operation_id: getDatabaseDescendants
   api_group: Descendants
-  migration_phase: extract
-  migration_use:
-  - Descendants extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Descendants inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1455,10 +1389,9 @@ endpoints:
   summary: Get direct children of a database
   operation_id: getDatabaseDirectChildren
   api_group: Children
-  migration_phase: extract
-  migration_use:
-  - Children extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Children inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1474,10 +1407,9 @@ endpoints:
   summary: Get permitted operations for a database
   operation_id: getDatabaseOperations
   api_group: Operation
-  migration_phase: extract
-  migration_use:
-  - Operation extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Operation inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1491,10 +1423,9 @@ endpoints:
   summary: Get content properties for database
   operation_id: getDatabaseContentProperties
   api_group: Content Properties
-  migration_phase: extract
-  migration_use:
-  - Content Properties extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Content Properties inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1510,10 +1441,9 @@ endpoints:
   summary: Create content property for database
   operation_id: createDatabaseProperty
   api_group: Content Properties
-  migration_phase: load
-  migration_use:
-  - Content Properties creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Content Properties creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1528,10 +1458,9 @@ endpoints:
   summary: Create Smart Link in the content tree
   operation_id: createSmartLink
   api_group: Smart Link
-  migration_phase: load
-  migration_use:
-  - Smart Link creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Smart Link creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1545,9 +1474,9 @@ endpoints:
   summary: Delete content property for Smart Link in the content tree by id
   operation_id: deleteSmartLinkPropertyById
   api_group: Content Properties
-  migration_phase: reconcile
-  migration_use:
-  - Content Properties reconciliation
+  operation_category: delete
+  use_cases:
+  - Content Properties cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1562,10 +1491,9 @@ endpoints:
   summary: Get content property for Smart Link in the content tree by id
   operation_id: getSmartLinkContentPropertiesById
   api_group: Content Properties
-  migration_phase: extract
-  migration_use:
-  - Content Properties extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Content Properties inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1579,10 +1507,9 @@ endpoints:
   summary: Update content property for Smart Link in the content tree by id
   operation_id: updateSmartLinkPropertyById
   api_group: Content Properties
-  migration_phase: load
-  migration_use:
-  - Content Properties creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Content Properties creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1597,9 +1524,9 @@ endpoints:
   summary: Delete Smart Link in the content tree
   operation_id: deleteSmartLink
   api_group: Smart Link
-  migration_phase: reconcile
-  migration_use:
-  - Smart Link reconciliation
+  operation_category: delete
+  use_cases:
+  - Smart Link cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1613,10 +1540,9 @@ endpoints:
   summary: Get Smart Link in the content tree by id
   operation_id: getSmartLinkById
   api_group: Smart Link
-  migration_phase: extract
-  migration_use:
-  - Smart Link extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Smart Link inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1630,10 +1556,9 @@ endpoints:
   summary: Get all ancestors of Smart Link in content tree
   operation_id: getSmartLinkAncestors
   api_group: Ancestors
-  migration_phase: extract
-  migration_use:
-  - Ancestors extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Ancestors inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1649,10 +1574,9 @@ endpoints:
   summary: Get descendants of a smart link
   operation_id: getSmartLinkDescendants
   api_group: Descendants
-  migration_phase: extract
-  migration_use:
-  - Descendants extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Descendants inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1668,10 +1592,9 @@ endpoints:
   summary: Get direct children of a Smart Link
   operation_id: getSmartLinkDirectChildren
   api_group: Children
-  migration_phase: extract
-  migration_use:
-  - Children extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Children inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1687,10 +1610,9 @@ endpoints:
   summary: Get permitted operations for a Smart Link in the content tree
   operation_id: getSmartLinkOperations
   api_group: Operation
-  migration_phase: extract
-  migration_use:
-  - Operation extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Operation inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1704,10 +1626,9 @@ endpoints:
   summary: Get content properties for Smart Link in the content tree
   operation_id: getSmartLinkContentProperties
   api_group: Content Properties
-  migration_phase: extract
-  migration_use:
-  - Content Properties extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Content Properties inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1723,10 +1644,9 @@ endpoints:
   summary: Create content property for Smart Link in the content tree
   operation_id: createSmartLinkProperty
   api_group: Content Properties
-  migration_phase: load
-  migration_use:
-  - Content Properties creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Content Properties creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1741,10 +1661,9 @@ endpoints:
   summary: Create folder
   operation_id: createFolder
   api_group: Folder
-  migration_phase: load
-  migration_use:
-  - Folder creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Folder creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1758,9 +1677,9 @@ endpoints:
   summary: Delete content property for folder by id
   operation_id: deleteFolderPropertyById
   api_group: Content Properties
-  migration_phase: reconcile
-  migration_use:
-  - Content Properties reconciliation
+  operation_category: delete
+  use_cases:
+  - Content Properties cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1775,10 +1694,9 @@ endpoints:
   summary: Get content property for folder by id
   operation_id: getFolderContentPropertiesById
   api_group: Content Properties
-  migration_phase: extract
-  migration_use:
-  - Content Properties extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Content Properties inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1792,10 +1710,9 @@ endpoints:
   summary: Update content property for folder by id
   operation_id: updateFolderPropertyById
   api_group: Content Properties
-  migration_phase: load
-  migration_use:
-  - Content Properties creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Content Properties creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1810,9 +1727,9 @@ endpoints:
   summary: Delete folder
   operation_id: deleteFolder
   api_group: Folder
-  migration_phase: reconcile
-  migration_use:
-  - Folder reconciliation
+  operation_category: delete
+  use_cases:
+  - Folder cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1826,10 +1743,9 @@ endpoints:
   summary: Get folder by id
   operation_id: getFolderById
   api_group: Folder
-  migration_phase: extract
-  migration_use:
-  - Folder extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Folder inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1843,10 +1759,9 @@ endpoints:
   summary: Get all ancestors of folder
   operation_id: getFolderAncestors
   api_group: Ancestors
-  migration_phase: extract
-  migration_use:
-  - Ancestors extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Ancestors inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1862,10 +1777,9 @@ endpoints:
   summary: Get descendants of folder
   operation_id: getFolderDescendants
   api_group: Descendants
-  migration_phase: extract
-  migration_use:
-  - Descendants extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Descendants inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1881,10 +1795,9 @@ endpoints:
   summary: Get direct children of a folder
   operation_id: getFolderDirectChildren
   api_group: Children
-  migration_phase: extract
-  migration_use:
-  - Children extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Children inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1900,10 +1813,9 @@ endpoints:
   summary: Get permitted operations for a folder
   operation_id: getFolderOperations
   api_group: Operation
-  migration_phase: extract
-  migration_use:
-  - Operation extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Operation inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1917,10 +1829,9 @@ endpoints:
   summary: Get content properties for folder
   operation_id: getFolderContentProperties
   api_group: Content Properties
-  migration_phase: extract
-  migration_use:
-  - Content Properties extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Content Properties inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1936,10 +1847,9 @@ endpoints:
   summary: Create content property for folder
   operation_id: createFolderProperty
   api_group: Content Properties
-  migration_phase: load
-  migration_use:
-  - Content Properties creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Content Properties creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1954,10 +1864,9 @@ endpoints:
   summary: Get footer comments
   operation_id: getFooterComments
   api_group: Comment
-  migration_phase: extract
-  migration_use:
-  - Comment extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Comment inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1973,10 +1882,9 @@ endpoints:
   summary: Create footer comment
   operation_id: createFooterComment
   api_group: Comment
-  migration_phase: load
-  migration_use:
-  - Comment creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Comment creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -1990,9 +1898,9 @@ endpoints:
   summary: Delete footer comment
   operation_id: deleteFooterComment
   api_group: Comment
-  migration_phase: reconcile
-  migration_use:
-  - Comment reconciliation
+  operation_category: delete
+  use_cases:
+  - Comment cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2006,10 +1914,9 @@ endpoints:
   summary: Get footer comment by id
   operation_id: getFooterCommentById
   api_group: Comment
-  migration_phase: extract
-  migration_use:
-  - Comment extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Comment inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2023,10 +1930,9 @@ endpoints:
   summary: Update footer comment
   operation_id: updateFooterComment
   api_group: Comment
-  migration_phase: load
-  migration_use:
-  - Comment creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Comment creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2040,10 +1946,9 @@ endpoints:
   summary: Get children footer comments
   operation_id: getFooterCommentChildren
   api_group: Comment
-  migration_phase: extract
-  migration_use:
-  - Comment extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Comment inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2059,10 +1964,9 @@ endpoints:
   summary: Get like count for footer comment
   operation_id: getFooterLikeCount
   api_group: Like
-  migration_phase: extract
-  migration_use:
-  - Like extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Like inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2076,10 +1980,9 @@ endpoints:
   summary: Get account IDs of likes for footer comment
   operation_id: getFooterLikeUsers
   api_group: Like
-  migration_phase: extract
-  migration_use:
-  - Like extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Like inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2095,10 +1998,9 @@ endpoints:
   summary: Get permitted operations for footer comment
   operation_id: getFooterCommentOperations
   api_group: Operation
-  migration_phase: extract
-  migration_use:
-  - Operation extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Operation inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2112,10 +2014,9 @@ endpoints:
   summary: Get footer comment versions
   operation_id: getFooterCommentVersions
   api_group: Version
-  migration_phase: extract
-  migration_use:
-  - Version extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Version inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2131,10 +2032,9 @@ endpoints:
   summary: Get version details for footer comment version
   operation_id: getFooterCommentVersionDetails
   api_group: Version
-  migration_phase: extract
-  migration_use:
-  - Version extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Version inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2148,10 +2048,9 @@ endpoints:
   summary: Get inline comments
   operation_id: getInlineComments
   api_group: Comment
-  migration_phase: extract
-  migration_use:
-  - Comment extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Comment inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2167,10 +2066,9 @@ endpoints:
   summary: Create inline comment
   operation_id: createInlineComment
   api_group: Comment
-  migration_phase: load
-  migration_use:
-  - Comment creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Comment creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2184,9 +2082,9 @@ endpoints:
   summary: Delete inline comment
   operation_id: deleteInlineComment
   api_group: Comment
-  migration_phase: reconcile
-  migration_use:
-  - Comment reconciliation
+  operation_category: delete
+  use_cases:
+  - Comment cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2200,10 +2098,9 @@ endpoints:
   summary: Get inline comment by id
   operation_id: getInlineCommentById
   api_group: Comment
-  migration_phase: extract
-  migration_use:
-  - Comment extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Comment inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2217,10 +2114,9 @@ endpoints:
   summary: Update inline comment
   operation_id: updateInlineComment
   api_group: Comment
-  migration_phase: load
-  migration_use:
-  - Comment creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Comment creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2234,10 +2130,9 @@ endpoints:
   summary: Get children inline comments
   operation_id: getInlineCommentChildren
   api_group: Comment
-  migration_phase: extract
-  migration_use:
-  - Comment extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Comment inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2253,10 +2148,9 @@ endpoints:
   summary: Get like count for inline comment
   operation_id: getInlineLikeCount
   api_group: Like
-  migration_phase: extract
-  migration_use:
-  - Like extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Like inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2270,10 +2164,9 @@ endpoints:
   summary: Get account IDs of likes for inline comment
   operation_id: getInlineLikeUsers
   api_group: Like
-  migration_phase: extract
-  migration_use:
-  - Like extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Like inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2289,10 +2182,9 @@ endpoints:
   summary: Get permitted operations for inline comment
   operation_id: getInlineCommentOperations
   api_group: Operation
-  migration_phase: extract
-  migration_use:
-  - Operation extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Operation inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2306,10 +2198,9 @@ endpoints:
   summary: Get inline comment versions
   operation_id: getInlineCommentVersions
   api_group: Version
-  migration_phase: extract
-  migration_use:
-  - Version extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Version inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2325,10 +2216,9 @@ endpoints:
   summary: Get version details for inline comment version
   operation_id: getInlineCommentVersionDetails
   api_group: Version
-  migration_phase: extract
-  migration_use:
-  - Version extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Version inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2342,10 +2232,9 @@ endpoints:
   summary: Get labels
   operation_id: getLabels
   api_group: Label
-  migration_phase: extract
-  migration_use:
-  - Label extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Label inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2361,10 +2250,9 @@ endpoints:
   summary: Get attachments for label
   operation_id: getLabelAttachments
   api_group: Attachment
-  migration_phase: extract
-  migration_use:
-  - Attachment extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Attachment inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2380,10 +2268,9 @@ endpoints:
   summary: Get blog posts for label
   operation_id: getLabelBlogPosts
   api_group: Blog Post
-  migration_phase: extract
-  migration_use:
-  - Blog Post extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Blog Post inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2399,10 +2286,9 @@ endpoints:
   summary: Get pages for label
   operation_id: getLabelPages
   api_group: Page
-  migration_phase: extract
-  migration_use:
-  - Page extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Page inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2418,10 +2304,9 @@ endpoints:
   summary: Get pages
   operation_id: getPages
   api_group: Page
-  migration_phase: extract
-  migration_use:
-  - Page extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Page inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2437,10 +2322,9 @@ endpoints:
   summary: Create page
   operation_id: createPage
   api_group: Page
-  migration_phase: load
-  migration_use:
-  - Page creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Page creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2454,9 +2338,9 @@ endpoints:
   summary: Delete page
   operation_id: deletePage
   api_group: Page
-  migration_phase: reconcile
-  migration_use:
-  - Page reconciliation
+  operation_category: delete
+  use_cases:
+  - Page cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2470,10 +2354,9 @@ endpoints:
   summary: Get page by id
   operation_id: getPageById
   api_group: Page
-  migration_phase: extract
-  migration_use:
-  - Page extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Page inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2487,10 +2370,9 @@ endpoints:
   summary: Update page
   operation_id: updatePage
   api_group: Page
-  migration_phase: load
-  migration_use:
-  - Page creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Page creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2504,10 +2386,9 @@ endpoints:
   summary: Get all ancestors of page
   operation_id: getPageAncestors
   api_group: Ancestors
-  migration_phase: extract
-  migration_use:
-  - Ancestors extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Ancestors inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2523,10 +2404,9 @@ endpoints:
   summary: Get attachments for page
   operation_id: getPageAttachments
   api_group: Attachment
-  migration_phase: extract
-  migration_use:
-  - Attachment extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Attachment inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2542,10 +2422,9 @@ endpoints:
   summary: Get child pages
   operation_id: getChildPages
   api_group: Children
-  migration_phase: extract
-  migration_use:
-  - Children extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Children inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2561,10 +2440,9 @@ endpoints:
   summary: Get page classification level
   operation_id: getPageClassificationLevel
   api_group: Classification Level
-  migration_phase: extract
-  migration_use:
-  - Classification Level extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Classification Level inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2579,10 +2457,9 @@ endpoints:
   summary: Update page classification level
   operation_id: putPageClassificationLevel
   api_group: Classification Level
-  migration_phase: load
-  migration_use:
-  - Classification Level creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Classification Level creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2596,9 +2473,9 @@ endpoints:
   summary: Reset page classification level
   operation_id: postPageClassificationLevel
   api_group: Classification Level
-  migration_phase: transform
-  migration_use:
-  - Classification Level reconciliation
+  operation_category: write
+  use_cases:
+  - Classification Level creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2612,10 +2489,9 @@ endpoints:
   summary: Get custom content by type in page
   operation_id: getCustomContentByTypeInPage
   api_group: Custom Content
-  migration_phase: extract
-  migration_use:
-  - Custom Content extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Custom Content inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2631,10 +2507,9 @@ endpoints:
   summary: Get descendants of page
   operation_id: getPageDescendants
   api_group: Descendants
-  migration_phase: extract
-  migration_use:
-  - Descendants extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Descendants inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2650,10 +2525,9 @@ endpoints:
   summary: Get direct children of a page
   operation_id: getPageDirectChildren
   api_group: Children
-  migration_phase: extract
-  migration_use:
-  - Children extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Children inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2669,10 +2543,9 @@ endpoints:
   summary: Get footer comments for page
   operation_id: getPageFooterComments
   api_group: Comment
-  migration_phase: extract
-  migration_use:
-  - Comment extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Comment inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2688,10 +2561,9 @@ endpoints:
   summary: Get inline comments for page
   operation_id: getPageInlineComments
   api_group: Comment
-  migration_phase: extract
-  migration_use:
-  - Comment extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Comment inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2707,10 +2579,9 @@ endpoints:
   summary: Get labels for page
   operation_id: getPageLabels
   api_group: Label
-  migration_phase: extract
-  migration_use:
-  - Label extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Label inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2726,10 +2597,9 @@ endpoints:
   summary: Get like count for page
   operation_id: getPageLikeCount
   api_group: Like
-  migration_phase: extract
-  migration_use:
-  - Like extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Like inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2743,10 +2613,9 @@ endpoints:
   summary: Get account IDs of likes for page
   operation_id: getPageLikeUsers
   api_group: Like
-  migration_phase: extract
-  migration_use:
-  - Like extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Like inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2762,10 +2631,9 @@ endpoints:
   summary: Get permitted operations for page
   operation_id: getPageOperations
   api_group: Operation
-  migration_phase: extract
-  migration_use:
-  - Operation extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Operation inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2779,9 +2647,9 @@ endpoints:
   summary: Redact Content in a Confluence Page
   operation_id: postRedactPage
   api_group: Redactions
-  migration_phase: transform
-  migration_use:
-  - Redactions reconciliation
+  operation_category: write
+  use_cases:
+  - Redactions creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2795,10 +2663,9 @@ endpoints:
   summary: Update page title
   operation_id: updatePageTitle
   api_group: Page
-  migration_phase: load
-  migration_use:
-  - Page creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Page creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2812,10 +2679,9 @@ endpoints:
   summary: Get page versions
   operation_id: getPageVersions
   api_group: Version
-  migration_phase: extract
-  migration_use:
-  - Version extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Version inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2831,10 +2697,9 @@ endpoints:
   summary: Get content properties for page
   operation_id: getPageContentProperties
   api_group: Content Properties
-  migration_phase: extract
-  migration_use:
-  - Content Properties extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Content Properties inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2850,10 +2715,9 @@ endpoints:
   summary: Create content property for page
   operation_id: createPageProperty
   api_group: Content Properties
-  migration_phase: load
-  migration_use:
-  - Content Properties creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Content Properties creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2868,9 +2732,9 @@ endpoints:
   summary: Delete content property for page by id
   operation_id: deletePagePropertyById
   api_group: Content Properties
-  migration_phase: reconcile
-  migration_use:
-  - Content Properties reconciliation
+  operation_category: delete
+  use_cases:
+  - Content Properties cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2885,10 +2749,9 @@ endpoints:
   summary: Get content property for page by id
   operation_id: getPageContentPropertiesById
   api_group: Content Properties
-  migration_phase: extract
-  migration_use:
-  - Content Properties extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Content Properties inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2902,10 +2765,9 @@ endpoints:
   summary: Update content property for page by id
   operation_id: updatePagePropertyById
   api_group: Content Properties
-  migration_phase: load
-  migration_use:
-  - Content Properties creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Content Properties creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2920,10 +2782,9 @@ endpoints:
   summary: Get version details for page version
   operation_id: getPageVersionDetails
   api_group: Version
-  migration_phase: extract
-  migration_use:
-  - Version extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Version inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2937,10 +2798,9 @@ endpoints:
   summary: Get available space permissions
   operation_id: getAvailableSpacePermissions
   api_group: Space Permissions
-  migration_phase: extract
-  migration_use:
-  - Space Permissions extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Space Permissions inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2956,10 +2816,9 @@ endpoints:
   summary: Bulk remove space permission access
   operation_id: bulkRemoveSpacePermissionAccess
   api_group: Space Permission Transition
-  migration_phase: load
-  migration_use:
-  - Space Permission Transition creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Space Permission Transition creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2973,10 +2832,9 @@ endpoints:
   summary: List unassigned space permission combinations
   operation_id: listSpacePermissionCombinations
   api_group: Space Permission Transition
-  migration_phase: extract
-  migration_use:
-  - Space Permission Transition extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Space Permission Transition inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -2992,10 +2850,9 @@ endpoints:
   summary: Generate space permission combinations
   operation_id: generateSpacePermissionCombinations
   api_group: Space Permission Transition
-  migration_phase: load
-  migration_use:
-  - Space Permission Transition creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Space Permission Transition creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3009,10 +2866,9 @@ endpoints:
   summary: Bulk assign space permission roles
   operation_id: bulkAssignSpacePermissionRoles
   api_group: Space Permission Transition
-  migration_phase: load
-  migration_use:
-  - Space Permission Transition creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Space Permission Transition creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3026,10 +2882,9 @@ endpoints:
   summary: Get space permission transition task status
   operation_id: getSpacePermissionTransitionTaskStatus
   api_group: Space Permission Transition
-  migration_phase: extract
-  migration_use:
-  - Space Permission Transition extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Space Permission Transition inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3043,10 +2898,9 @@ endpoints:
   summary: Get space role mode
   operation_id: getSpaceRoleMode
   api_group: Space Roles
-  migration_phase: extract
-  migration_use:
-  - Space Roles extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Space Roles inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3060,10 +2914,9 @@ endpoints:
   summary: Get available space roles
   operation_id: getAvailableSpaceRoles
   api_group: Space Roles
-  migration_phase: extract
-  migration_use:
-  - Space Roles extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Space Roles inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3079,10 +2932,9 @@ endpoints:
   summary: Create a space role
   operation_id: createSpaceRole
   api_group: Space Roles
-  migration_phase: load
-  migration_use:
-  - Space Roles creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Space Roles creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3096,9 +2948,9 @@ endpoints:
   summary: Delete a space role
   operation_id: deleteSpaceRole
   api_group: Space Roles
-  migration_phase: reconcile
-  migration_use:
-  - Space Roles reconciliation
+  operation_category: delete
+  use_cases:
+  - Space Roles cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3112,10 +2964,9 @@ endpoints:
   summary: Get space role by ID
   operation_id: getSpaceRolesById
   api_group: Space Roles
-  migration_phase: extract
-  migration_use:
-  - Space Roles extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Space Roles inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3129,10 +2980,9 @@ endpoints:
   summary: Update a space role
   operation_id: updateSpaceRole
   api_group: Space Roles
-  migration_phase: load
-  migration_use:
-  - Space Roles creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Space Roles creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3146,10 +2996,9 @@ endpoints:
   summary: Get spaces
   operation_id: getSpaces
   api_group: Space
-  migration_phase: extract
-  migration_use:
-  - Space extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Space inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3165,10 +3014,9 @@ endpoints:
   summary: Create space
   operation_id: createSpace
   api_group: Space
-  migration_phase: load
-  migration_use:
-  - Space creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Space creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3182,10 +3030,9 @@ endpoints:
   summary: Get space by id
   operation_id: getSpaceById
   api_group: Space
-  migration_phase: extract
-  migration_use:
-  - Space extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Space inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3199,10 +3046,9 @@ endpoints:
   summary: Get blog posts in space
   operation_id: getBlogPostsInSpace
   api_group: Blog Post
-  migration_phase: extract
-  migration_use:
-  - Blog Post extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Blog Post inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3218,9 +3064,9 @@ endpoints:
   summary: Delete space default classification level
   operation_id: deleteSpaceDefaultClassificationLevel
   api_group: Classification Level
-  migration_phase: reconcile
-  migration_use:
-  - Classification Level reconciliation
+  operation_category: delete
+  use_cases:
+  - Classification Level cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3235,10 +3081,9 @@ endpoints:
   summary: Get space default classification level
   operation_id: getSpaceDefaultClassificationLevel
   api_group: Classification Level
-  migration_phase: extract
-  migration_use:
-  - Classification Level extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Classification Level inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3252,10 +3097,9 @@ endpoints:
   summary: Update space default classification level
   operation_id: putSpaceDefaultClassificationLevel
   api_group: Classification Level
-  migration_phase: load
-  migration_use:
-  - Classification Level creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Classification Level creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3270,10 +3114,9 @@ endpoints:
   summary: Get labels for space content
   operation_id: getSpaceContentLabels
   api_group: Label
-  migration_phase: extract
-  migration_use:
-  - Label extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Label inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3289,10 +3132,9 @@ endpoints:
   summary: Get custom content by type in space
   operation_id: getCustomContentByTypeInSpace
   api_group: Custom Content
-  migration_phase: extract
-  migration_use:
-  - Custom Content extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Custom Content inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3308,10 +3150,9 @@ endpoints:
   summary: Get labels for space
   operation_id: getSpaceLabels
   api_group: Label
-  migration_phase: extract
-  migration_use:
-  - Label extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Label inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3327,10 +3168,9 @@ endpoints:
   summary: Get permitted operations for space
   operation_id: getSpaceOperations
   api_group: Operation
-  migration_phase: extract
-  migration_use:
-  - Operation extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Operation inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3344,10 +3184,9 @@ endpoints:
   summary: Get pages in space
   operation_id: getPagesInSpace
   api_group: Page
-  migration_phase: extract
-  migration_use:
-  - Page extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Page inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3363,10 +3202,9 @@ endpoints:
   summary: Get space permissions assignments
   operation_id: getSpacePermissionsAssignments
   api_group: Space Permissions
-  migration_phase: extract
-  migration_use:
-  - Space Permissions extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Space Permissions inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3382,10 +3220,9 @@ endpoints:
   summary: Get space role assignments
   operation_id: getSpaceRoleAssignments
   api_group: Space Roles
-  migration_phase: extract
-  migration_use:
-  - Space Roles extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Space Roles inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3401,10 +3238,9 @@ endpoints:
   summary: Set space role assignments
   operation_id: setSpaceRoleAssignments
   api_group: Space Roles
-  migration_phase: load
-  migration_use:
-  - Space Roles creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Space Roles creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3418,10 +3254,9 @@ endpoints:
   summary: Get space properties in space
   operation_id: getSpaceProperties
   api_group: Space Properties
-  migration_phase: extract
-  migration_use:
-  - Space Properties extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Space Properties inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3437,10 +3272,9 @@ endpoints:
   summary: Create space property in space
   operation_id: createSpaceProperty
   api_group: Space Properties
-  migration_phase: load
-  migration_use:
-  - Space Properties creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Space Properties creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3455,9 +3289,9 @@ endpoints:
   summary: Delete space property by id
   operation_id: deleteSpacePropertyById
   api_group: Space Properties
-  migration_phase: reconcile
-  migration_use:
-  - Space Properties reconciliation
+  operation_category: delete
+  use_cases:
+  - Space Properties cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3472,10 +3306,9 @@ endpoints:
   summary: Get space property by id
   operation_id: getSpacePropertyById
   api_group: Space Properties
-  migration_phase: extract
-  migration_use:
-  - Space Properties extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Space Properties inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3489,10 +3322,9 @@ endpoints:
   summary: Update space property by id
   operation_id: updateSpacePropertyById
   api_group: Space Properties
-  migration_phase: load
-  migration_use:
-  - Space Properties creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Space Properties creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3507,10 +3339,9 @@ endpoints:
   summary: Get tasks
   operation_id: getTasks
   api_group: Task
-  migration_phase: extract
-  migration_use:
-  - Task extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Task inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3526,10 +3357,9 @@ endpoints:
   summary: Get task by id
   operation_id: getTaskById
   api_group: Task
-  migration_phase: extract
-  migration_use:
-  - Task extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Task inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3543,10 +3373,9 @@ endpoints:
   summary: Update task
   operation_id: updateTask
   api_group: Task
-  migration_phase: load
-  migration_use:
-  - Task creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Task creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3560,9 +3389,9 @@ endpoints:
   summary: Check site access for a list of emails
   operation_id: checkAccessByEmail
   api_group: User
-  migration_phase: transform
-  migration_use:
-  - User reconciliation
+  operation_category: write
+  use_cases:
+  - User creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3576,9 +3405,9 @@ endpoints:
   summary: Invite a list of emails to the site
   operation_id: inviteByEmail
   api_group: User
-  migration_phase: transform
-  migration_use:
-  - User reconciliation
+  operation_category: write
+  use_cases:
+  - User creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3592,10 +3421,9 @@ endpoints:
   summary: Create bulk user lookup using ids
   operation_id: createBulkUserLookup
   api_group: User
-  migration_phase: load
-  migration_use:
-  - User creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - User creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3609,10 +3437,9 @@ endpoints:
   summary: Create whiteboard
   operation_id: createWhiteboard
   api_group: Whiteboard
-  migration_phase: load
-  migration_use:
-  - Whiteboard creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Whiteboard creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3626,9 +3453,9 @@ endpoints:
   summary: Delete whiteboard
   operation_id: deleteWhiteboard
   api_group: Whiteboard
-  migration_phase: reconcile
-  migration_use:
-  - Whiteboard reconciliation
+  operation_category: delete
+  use_cases:
+  - Whiteboard cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3642,10 +3469,9 @@ endpoints:
   summary: Get whiteboard by id
   operation_id: getWhiteboardById
   api_group: Whiteboard
-  migration_phase: extract
-  migration_use:
-  - Whiteboard extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Whiteboard inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3659,10 +3485,9 @@ endpoints:
   summary: Get all ancestors of whiteboard
   operation_id: getWhiteboardAncestors
   api_group: Ancestors
-  migration_phase: extract
-  migration_use:
-  - Ancestors extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Ancestors inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3678,10 +3503,9 @@ endpoints:
   summary: Get whiteboard classification level
   operation_id: getWhiteboardClassificationLevel
   api_group: Classification Level
-  migration_phase: extract
-  migration_use:
-  - Classification Level extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Classification Level inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3695,10 +3519,9 @@ endpoints:
   summary: Update whiteboard classification level
   operation_id: putWhiteboardClassificationLevel
   api_group: Classification Level
-  migration_phase: load
-  migration_use:
-  - Classification Level creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Classification Level creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3712,9 +3535,9 @@ endpoints:
   summary: Reset whiteboard classification level
   operation_id: postWhiteboardClassificationLevel
   api_group: Classification Level
-  migration_phase: transform
-  migration_use:
-  - Classification Level reconciliation
+  operation_category: write
+  use_cases:
+  - Classification Level creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3728,10 +3551,9 @@ endpoints:
   summary: Get descendants of a whiteboard
   operation_id: getWhiteboardDescendants
   api_group: Descendants
-  migration_phase: extract
-  migration_use:
-  - Descendants extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Descendants inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3747,10 +3569,9 @@ endpoints:
   summary: Get direct children of a whiteboard
   operation_id: getWhiteboardDirectChildren
   api_group: Children
-  migration_phase: extract
-  migration_use:
-  - Children extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Children inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3766,10 +3587,9 @@ endpoints:
   summary: Get permitted operations for a whiteboard
   operation_id: getWhiteboardOperations
   api_group: Operation
-  migration_phase: extract
-  migration_use:
-  - Operation extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Operation inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3783,10 +3603,9 @@ endpoints:
   summary: Get content properties for whiteboard
   operation_id: getWhiteboardContentProperties
   api_group: Content Properties
-  migration_phase: extract
-  migration_use:
-  - Content Properties extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Content Properties inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3802,10 +3621,9 @@ endpoints:
   summary: Create content property for whiteboard
   operation_id: createWhiteboardProperty
   api_group: Content Properties
-  migration_phase: load
-  migration_use:
-  - Content Properties creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Content Properties creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3820,9 +3638,9 @@ endpoints:
   summary: Delete content property for whiteboard by id
   operation_id: deleteWhiteboardPropertyById
   api_group: Content Properties
-  migration_phase: reconcile
-  migration_use:
-  - Content Properties reconciliation
+  operation_category: delete
+  use_cases:
+  - Content Properties cleanup, removal, or reconciliation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3837,10 +3655,9 @@ endpoints:
   summary: Get content property for whiteboard by id
   operation_id: getWhiteboardContentPropertiesById
   api_group: Content Properties
-  migration_phase: extract
-  migration_use:
-  - Content Properties extraction
-  - Source-to-target validation
+  operation_category: read
+  use_cases:
+  - Content Properties inventory, lookup, reporting, or validation
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:
@@ -3854,10 +3671,9 @@ endpoints:
   summary: Update content property for whiteboard by id
   operation_id: updateWhiteboardPropertyById
   api_group: Content Properties
-  migration_phase: load
-  migration_use:
-  - Content Properties creation or update during target load
-  - Post-migration correction or backfill
+  operation_category: write
+  use_cases:
+  - Content Properties creation, update, automation, or backfill
   permissions:
   - See official documentation for product permissions and visibility constraints
   scopes:

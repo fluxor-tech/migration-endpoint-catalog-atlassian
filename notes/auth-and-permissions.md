@@ -9,7 +9,7 @@ Common authentication modes:
 - Forge app authentication
 - Connect app authentication where applicable
 
-Migration work usually needs a deliberately privileged account or app with access to all source and target projects/spaces involved in the migration.
+Administrative, integration, and migration work usually needs a deliberately privileged account or app with access to all projects/spaces involved in the operation.
 
 ## Practical Checks
 
@@ -22,5 +22,4 @@ Migration work usually needs a deliberately privileged account or app with acces
 
 ## Account IDs
 
-Jira Cloud identifies users by account ID. Migration mappings should avoid usernames and legacy user keys unless they are only retained as historical source identifiers.
-
+Jira Cloud identifies users by account ID. Integration and migration mappings should avoid usernames and legacy user keys unless they are only retained as historical source identifiers.
