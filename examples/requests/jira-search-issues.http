@@ -1,0 +1,4 @@
+GET https://example.atlassian.net/rest/api/3/search/jql?jql=project%20%3D%20SRC%20ORDER%20BY%20key&fields=summary,status,issuetype,parent,updated
+Accept: application/json
+Authorization: Basic <email:api-token>
+

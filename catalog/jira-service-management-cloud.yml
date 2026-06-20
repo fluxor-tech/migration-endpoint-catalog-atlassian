@@ -1,0 +1,95 @@
+vendor: Atlassian
+product: Jira Service Management Cloud
+api_family: Jira Service Management Cloud REST API
+base_url_template: "https://{site}.atlassian.net"
+official_docs:
+  root: "https://developer.atlassian.com/cloud/jira/service-desk/rest/"
+catalog_status: starter
+last_reviewed: "2026-06-20"
+endpoints:
+  - id: jsm-get-service-desks
+    status: reviewed
+    method: GET
+    path: /rest/servicedeskapi/servicedesk
+    summary: List service desks.
+    migration_phase: discover
+    migration_use:
+      - Service project inventory
+      - Portal/request type mapping
+    permissions:
+      - Jira Service Management agent or admin access as required by tenant configuration
+    scopes:
+      classic:
+        - read:servicedesk-request
+    pagination:
+      style: page
+    official_doc_url: "https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-servicedesk/"
+
+  - id: jsm-get-request-types
+    status: reviewed
+    method: GET
+    path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/requesttype
+    summary: List request types for a service desk.
+    migration_phase: discover
+    migration_use:
+      - Request type inventory
+      - Portal form mapping
+      - Intake migration planning
+    permissions:
+      - Access to the service desk
+    scopes:
+      classic:
+        - read:servicedesk-request
+    official_doc_url: "https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-requesttype/"
+
+  - id: jsm-get-request-type-fields
+    status: candidate
+    method: GET
+    path: /rest/servicedeskapi/servicedesk/{serviceDeskId}/requesttype/{requestTypeId}/field
+    summary: Get request type fields.
+    migration_phase: discover
+    migration_use:
+      - Portal field inventory
+      - Required field mapping
+      - Request creation readiness checks
+    permissions:
+      - Access to the service desk
+    scopes:
+      classic:
+        - read:servicedesk-request
+    official_doc_url: "https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-requesttype/"
+
+  - id: jsm-create-request
+    status: reviewed
+    method: POST
+    path: /rest/servicedeskapi/request
+    summary: Create a customer request.
+    migration_phase: load
+    migration_use:
+      - Portal request load
+      - Controlled migration smoke tests
+    permissions:
+      - Customer or agent permission to raise requests
+    scopes:
+      classic:
+        - write:servicedesk-request
+    official_doc_url: "https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/"
+    notes:
+      - Request payload depends on request type fields and required portal fields.
+
+  - id: jsm-get-request
+    status: reviewed
+    method: GET
+    path: /rest/servicedeskapi/request/{issueIdOrKey}
+    summary: Read a customer request.
+    migration_phase: validate
+    migration_use:
+      - Request validation
+      - Portal-facing data checks
+    permissions:
+      - Access to the request
+    scopes:
+      classic:
+        - read:servicedesk-request
+    official_doc_url: "https://developer.atlassian.com/cloud/jira/service-desk/rest/api-group-request/"
+

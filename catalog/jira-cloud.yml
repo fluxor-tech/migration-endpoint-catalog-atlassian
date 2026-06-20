@@ -1,0 +1,323 @@
+vendor: Atlassian
+product: Jira Cloud
+api_family: Jira Cloud Platform REST API v3
+base_url_template: "https://{site}.atlassian.net"
+official_docs:
+  root: "https://developer.atlassian.com/cloud/jira/platform/rest/v3/"
+  authentication: "https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#authentication-and-authorization"
+catalog_status: starter
+last_reviewed: "2026-06-20"
+endpoints:
+  - id: jira-search-issues-jql
+    status: reviewed
+    method: GET
+    path: /rest/api/3/search/jql
+    summary: Search issues with JQL and pagination.
+    migration_phase: extract
+    migration_use:
+      - Bulk issue extraction
+      - Delta extraction by updated date
+      - Migration validation counts
+    auth:
+      types:
+        - basic_api_token
+        - oauth_2_3lo
+        - forge_app
+    permissions:
+      - Browse Projects
+      - Issue security permissions where applicable
+    scopes:
+      classic:
+        - read:jira-work
+      granular:
+        - read:issue-details:jira
+    pagination:
+      style: cursor_or_page
+      notes: Use Atlassian response metadata to continue through result pages.
+    official_doc_url: "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-search/"
+    notes:
+      - Prefer explicit field lists during extraction to reduce payload size.
+      - Use stable ordering in JQL when producing repeatable migration batches.
+
+  - id: jira-get-issue
+    status: reviewed
+    method: GET
+    path: /rest/api/3/issue/{issueIdOrKey}
+    summary: Read one issue by ID or key.
+    migration_phase: extract
+    migration_use:
+      - Issue detail extraction
+      - Key mapping after project moves
+      - Post-load validation
+    permissions:
+      - Browse Projects
+      - Issue security permissions where applicable
+    scopes:
+      classic:
+        - read:jira-work
+      granular:
+        - read:issue-details:jira
+    official_doc_url: "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issues/"
+    notes:
+      - Use the fields query parameter to limit payload.
+      - Old issue keys may resolve after moves, which is useful for migration key mapping.
+
+  - id: jira-get-issue-changelog
+    status: reviewed
+    method: GET
+    path: /rest/api/3/issue/{issueIdOrKey}/changelog
+    summary: Read issue changelog entries.
+    migration_phase: reconcile
+    migration_use:
+      - Recover historical key changes
+      - Detect moved parents or links
+      - Audit field nullification after moves
+    permissions:
+      - Browse Projects
+      - Issue security permissions where applicable
+    scopes:
+      classic:
+        - read:jira-work
+      granular:
+        - read:issue.changelog:jira
+    pagination:
+      style: page
+      notes: Paginate through changelog histories for long-lived issues.
+    official_doc_url: "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issues/"
+    notes:
+      - Changelog does not reconstruct initial values that were never changed.
+
+  - id: jira-create-issue
+    status: reviewed
+    method: POST
+    path: /rest/api/3/issue
+    summary: Create an issue.
+    migration_phase: load
+    migration_use:
+      - Target issue creation
+      - Controlled test loads
+    permissions:
+      - Create Issues
+    scopes:
+      classic:
+        - write:jira-work
+      granular:
+        - write:issue:jira
+    official_doc_url: "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issues/"
+    notes:
+      - Validate required fields with create metadata before bulk loads.
+      - Prefer staged batches and capture source-to-target key mapping.
+
+  - id: jira-update-issue
+    status: reviewed
+    method: PUT
+    path: /rest/api/3/issue/{issueIdOrKey}
+    summary: Update fields on an issue.
+    migration_phase: load
+    migration_use:
+      - Field backfill
+      - Parent repair
+      - Description enrichment
+      - Post-move data restoration
+    permissions:
+      - Edit Issues
+    scopes:
+      classic:
+        - write:jira-work
+      granular:
+        - write:issue:jira
+    official_doc_url: "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issues/"
+    notes:
+      - Some fields cannot be set directly and require workflow transitions, app APIs, or admin configuration.
+
+  - id: jira-get-fields
+    status: reviewed
+    method: GET
+    path: /rest/api/3/field
+    summary: List system and custom fields.
+    migration_phase: discover
+    migration_use:
+      - Field inventory
+      - Custom field ID mapping
+      - Schema/type analysis
+    permissions:
+      - Jira access
+    scopes:
+      classic:
+        - read:jira-work
+      granular:
+        - read:field:jira
+    official_doc_url: "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-fields/"
+    notes:
+      - Capture field ID, name, schema, custom type, and scope for migration dictionaries.
+
+  - id: jira-get-field-contexts
+    status: candidate
+    method: GET
+    path: /rest/api/3/field/{fieldId}/context
+    summary: List contexts for a custom field.
+    migration_phase: discover
+    migration_use:
+      - Field scope analysis
+      - Project and issue type mapping
+    permissions:
+      - Administer Jira
+    scopes:
+      granular:
+        - read:field-configuration:jira
+    official_doc_url: "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-custom-field-contexts/"
+    notes:
+      - Useful when consolidating project-scoped fields into global or canonical fields.
+
+  - id: jira-get-projects
+    status: reviewed
+    method: GET
+    path: /rest/api/3/project/search
+    summary: Search projects.
+    migration_phase: discover
+    migration_use:
+      - Project inventory
+      - Project key/name mapping
+      - Target readiness checks
+    permissions:
+      - Browse Projects
+    scopes:
+      classic:
+        - read:jira-work
+      granular:
+        - read:project:jira
+    pagination:
+      style: page
+    official_doc_url: "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-projects/"
+
+  - id: jira-get-project
+    status: reviewed
+    method: GET
+    path: /rest/api/3/project/{projectIdOrKey}
+    summary: Read project details.
+    migration_phase: discover
+    migration_use:
+      - Project configuration checks
+      - Target project validation
+    permissions:
+      - Browse Projects
+    scopes:
+      classic:
+        - read:jira-work
+      granular:
+        - read:project:jira
+    official_doc_url: "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-projects/"
+
+  - id: jira-get-issue-link-types
+    status: reviewed
+    method: GET
+    path: /rest/api/3/issueLinkType
+    summary: List issue link types.
+    migration_phase: discover
+    migration_use:
+      - Link type mapping
+      - Link restoration planning
+    permissions:
+      - Jira access
+    scopes:
+      classic:
+        - read:jira-work
+      granular:
+        - read:issue-link-type:jira
+    official_doc_url: "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-link-types/"
+
+  - id: jira-create-issue-link
+    status: reviewed
+    method: POST
+    path: /rest/api/3/issueLink
+    summary: Create a link between two issues.
+    migration_phase: load
+    migration_use:
+      - Restore dependencies
+      - Restore cross-project links
+      - Restore relationship graph after moves
+    permissions:
+      - Link Issues
+      - Browse Projects
+    scopes:
+      classic:
+        - write:jira-work
+      granular:
+        - write:issue-link:jira
+    official_doc_url: "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-links/"
+    notes:
+      - Validate inward and outward link semantics before restoring links.
+
+  - id: jira-get-workflows
+    status: candidate
+    method: GET
+    path: /rest/api/3/workflow/search
+    summary: Search workflows.
+    migration_phase: discover
+    migration_use:
+      - Workflow inventory
+      - Status transition compatibility checks
+    permissions:
+      - Administer Jira
+    scopes:
+      granular:
+        - read:workflow:jira
+    official_doc_url: "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-workflows/"
+
+  - id: jira-get-statuses
+    status: reviewed
+    method: GET
+    path: /rest/api/3/status
+    summary: List statuses.
+    migration_phase: discover
+    migration_use:
+      - Status mapping
+      - Workflow category analysis
+    permissions:
+      - Jira access
+    scopes:
+      classic:
+        - read:jira-work
+      granular:
+        - read:status:jira
+    official_doc_url: "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-status/"
+
+  - id: jira-get-users-search
+    status: reviewed
+    method: GET
+    path: /rest/api/3/user/search
+    summary: Search users.
+    migration_phase: transform
+    migration_use:
+      - Assignee mapping
+      - Reporter mapping
+      - Account ID resolution
+    permissions:
+      - Browse users and groups
+    scopes:
+      classic:
+        - read:jira-user
+      granular:
+        - read:user:jira
+    official_doc_url: "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-user-search/"
+    notes:
+      - Atlassian Cloud uses account IDs; do not rely on usernames.
+
+  - id: jira-get-attachments-metadata
+    status: candidate
+    method: GET
+    path: /rest/api/3/attachment/{id}
+    summary: Read attachment metadata.
+    migration_phase: extract
+    migration_use:
+      - Attachment inventory
+      - Attachment validation
+    permissions:
+      - Browse Projects
+    scopes:
+      classic:
+        - read:jira-work
+      granular:
+        - read:attachment:jira
+    official_doc_url: "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-attachments/"
+

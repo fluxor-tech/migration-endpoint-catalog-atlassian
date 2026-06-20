@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/fluxor-tech/migration-endpoint-catalog-atlassian/schemas/endpoint.schema.json",
+  "title": "Migration Endpoint Catalog",
+  "type": "object",
+  "required": [
+    "vendor",
+    "product",
+    "api_family",
+    "base_url_template",
+    "official_docs",
+    "catalog_status",
+    "last_reviewed",
+    "endpoints"
+  ],
+  "properties": {
+    "vendor": { "type": "string" },
+    "product": { "type": "string" },
+    "api_family": { "type": "string" },
+    "base_url_template": { "type": "string" },
+    "official_docs": {
+      "type": "object",
+      "required": ["root"],
+      "additionalProperties": { "type": "string", "format": "uri" }
+    },
+    "catalog_status": {
+      "type": "string",
+      "enum": ["starter", "active", "archived"]
+    },
+    "last_reviewed": {
+      "type": "string",
+      "format": "date"
+    },
+    "endpoints": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/endpoint" }
+    }
+  },
+  "$defs": {
+    "endpoint": {
+      "type": "object",
+      "required": [
+        "id",
+        "status",
+        "method",
+        "path",
+        "summary",
+        "migration_phase",
+        "migration_use",
+        "permissions",
+        "official_doc_url"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+[a-z0-9-]*$"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["candidate", "reviewed", "validated", "deprecated"]
+        },
+        "method": {
+          "type": "string",
+          "enum": ["GET", "POST", "PUT", "PATCH", "DELETE"]
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^/"
+        },
+        "summary": { "type": "string" },
+        "migration_phase": {
+          "type": "string",
+          "enum": ["discover", "extract", "transform", "load", "validate", "reconcile"]
+        },
+        "migration_use": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "auth": {
+          "type": "object",
+          "properties": {
+            "types": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "additionalProperties": true
+        },
+        "permissions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "scopes": {
+          "type": "object",
+          "properties": {
+            "classic": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "granular": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "additionalProperties": false
+        },
+        "pagination": {
+          "type": "object",
+          "properties": {
+            "style": {
+              "type": "string",
+              "enum": ["none", "page", "cursor", "cursor_or_page"]
+            },
+            "notes": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "official_doc_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "notes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
+

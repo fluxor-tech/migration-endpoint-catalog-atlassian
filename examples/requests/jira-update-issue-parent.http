@@ -1,0 +1,13 @@
+PUT https://example.atlassian.net/rest/api/3/issue/TGT-123
+Accept: application/json
+Content-Type: application/json
+Authorization: Basic <email:api-token>
+
+{
+  "fields": {
+    "parent": {
+      "id": "10001"
+    }
+  }
+}
+

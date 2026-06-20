@@ -1,0 +1,118 @@
+vendor: Atlassian
+product: Confluence Cloud
+api_family: Confluence Cloud REST API v2
+base_url_template: "https://{site}.atlassian.net/wiki"
+official_docs:
+  root: "https://developer.atlassian.com/cloud/confluence/rest/v2/"
+  authentication: "https://developer.atlassian.com/cloud/confluence/rest/v2/intro/#authentication-and-authorization"
+catalog_status: starter
+last_reviewed: "2026-06-20"
+endpoints:
+  - id: confluence-get-pages
+    status: reviewed
+    method: GET
+    path: /api/v2/pages
+    summary: List pages.
+    migration_phase: extract
+    migration_use:
+      - Page inventory
+      - Space export planning
+      - Content validation
+    permissions:
+      - View permission on the relevant spaces/pages
+    scopes:
+      granular:
+        - read:page:confluence
+    pagination:
+      style: cursor
+    official_doc_url: "https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-page/"
+
+  - id: confluence-get-page
+    status: reviewed
+    method: GET
+    path: /api/v2/pages/{id}
+    summary: Read a page by ID.
+    migration_phase: extract
+    migration_use:
+      - Page body extraction
+      - Content comparison
+      - Post-migration validation
+    permissions:
+      - View permission on the page
+    scopes:
+      granular:
+        - read:page:confluence
+    official_doc_url: "https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-page/"
+    notes:
+      - Include body formats required by the migration pipeline.
+
+  - id: confluence-create-page
+    status: reviewed
+    method: POST
+    path: /api/v2/pages
+    summary: Create a page.
+    migration_phase: load
+    migration_use:
+      - Target page creation
+      - Documentation publication
+    permissions:
+      - Add page permission in the target space
+    scopes:
+      granular:
+        - write:page:confluence
+    official_doc_url: "https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-page/"
+
+  - id: confluence-update-page
+    status: reviewed
+    method: PUT
+    path: /api/v2/pages/{id}
+    summary: Update a page.
+    migration_phase: load
+    migration_use:
+      - Page content update
+      - Versioned documentation updates
+      - Post-load correction
+    permissions:
+      - Edit permission on the page
+    scopes:
+      granular:
+        - write:page:confluence
+    official_doc_url: "https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-page/"
+    notes:
+      - Confluence updates are versioned; capture current version before update.
+
+  - id: confluence-get-spaces
+    status: reviewed
+    method: GET
+    path: /api/v2/spaces
+    summary: List spaces.
+    migration_phase: discover
+    migration_use:
+      - Space inventory
+      - Source-to-target space mapping
+    permissions:
+      - View permission on spaces
+    scopes:
+      granular:
+        - read:space:confluence
+    pagination:
+      style: cursor
+    official_doc_url: "https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-space/"
+
+  - id: confluence-get-attachments
+    status: candidate
+    method: GET
+    path: /api/v2/pages/{id}/attachments
+    summary: List page attachments.
+    migration_phase: extract
+    migration_use:
+      - Attachment inventory
+      - File migration planning
+      - Attachment validation
+    permissions:
+      - View permission on the page
+    scopes:
+      granular:
+        - read:attachment:confluence
+    official_doc_url: "https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-attachment/"
+
